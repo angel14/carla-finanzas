@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="CS Finanzas">
+<meta name="application-name" content="CS Finanzas">
+<meta name="theme-color" content="#E8627A">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8627A'/><text y='.9em' font-size='60' x='50' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>CS</text></svg>">
+<link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;Carla Scherer - Finanzas&quot;,&quot;short_name&quot;:&quot;CS Finanzas&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%23FDF9F5&quot;,&quot;theme_color&quot;:&quot;%23E8627A&quot;,&quot;orientation&quot;:&quot;portrait&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23E8627A'/><text y='.9em' font-size='60' x='50' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'>CS</text></svg>&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
+<title>Carla Scherer Agent2 — Finanzas</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose:#E8627A; --rose2:#D14F67; --rose3:#F28EA0;
+  --rose-pale:#FFF0F3; --rose-ultra:#FDF5F7;
+  --lavender:#9B7EC8; --lavender2:#8066B0; --lavender-pale:#F3EFF9;
+  --gold:#E8B84B; --gold2:#C99A30; --gold-pale:#FDF8EC;
+  --mint:#6BBFA3; --mint-pale:#EFF8F4;
+  --cream:#FDF9F5; --cream2:#F7F0E8; --cream3:#EDE4D8;
+  --text:#2D1B3A; --text2:#5A3D6B; --muted:#9B8AAA; --muted2:#C4B8D0;
+  --white:#FFFFFF;
+  --shadow-sm:0 2px 8px rgba(45,27,58,.08);
+  --shadow:0 4px 20px rgba(45,27,58,.10);
+  --shadow-lg:0 12px 48px rgba(45,27,58,.14);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:var(--cream);color:var(--text);
+  font-family:'Quicksand',sans-serif;-webkit-font-smoothing:antialiased}
+
+/* ─── DECORATIVE PATTERN ─── */
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:
+    radial-gradient(circle at 10% 15%, rgba(232,98,122,.06) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(155,126,200,.07) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(232,184,75,.04) 0%, transparent 60%);
+}
+
+/* ─── LOGIN ─── */
+#loginScreen{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg, #FFF0F3 0%, #F3EFF9 50%, #FDF8EC 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;
+}
+.login-deco{
+  position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;
+}
+.login-petal{
+  position:absolute;border-radius:50% 0 50% 0;opacity:.15;
+}
+.petal-1{width:180px;height:180px;background:var(--rose);top:-40px;left:-40px;transform:rotate(45deg)}
+.petal-2{width:140px;height:140px;background:var(--lavender);bottom:-30px;right:-30px;transform:rotate(30deg)}
+.petal-3{width:100px;height:100px;background:var(--gold);top:30%;right:-20px;transform:rotate(60deg)}
+.petal-4{width:80px;height:80px;background:var(--mint);bottom:20%;left:-15px;transform:rotate(20deg)}
+
+.login-card{
+  background:var(--white);border-radius:24px;
+  padding:44px 40px 36px;width:100%;max-width:400px;
+  box-shadow:var(--shadow-lg),0 0 0 1px rgba(232,98,122,.12);
+  position:relative;z-index:1;
+}
+.login-card::before{
+  content:'';position:absolute;top:-22px;left:50%;transform:translateX(-50%);
+  font-size:15px;background:transparent;
+}
+.login-brand{
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:700;
+  color:var(--rose);text-align:center;margin-bottom:4px;
+}
+.login-sub{
+  font-size:11px;color:var(--muted);text-align:center;letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:32px;
+}
+.login-label{
+  font-size:11px;font-weight:600;color:var(--text2);letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:8px;display:block;
+}
+.login-input{
+  width:100%;background:var(--rose-pale);border:2px solid transparent;
+  border-radius:12px;padding:13px 18px;color:var(--text);
+  font-size:16px;font-family:'Quicksand',sans-serif;
+  outline:none;text-align:center;letter-spacing:6px;
+  transition:all .3s;margin-bottom:16px;
+}
+.login-input:focus{border-color:var(--rose);background:var(--white);}
+.login-btn{
+  width:100%;padding:14px;border:none;border-radius:12px;
+  background:linear-gradient(135deg,var(--rose),var(--lavender));
+  color:var(--white);font-size:14px;font-weight:700;
+  cursor:pointer;font-family:'Quicksand',sans-serif;letter-spacing:1px;
+  transition:all .3s;box-shadow:0 4px 16px rgba(232,98,122,.35);
+}
+.login-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,98,122,.45);}
+.login-err{color:var(--rose);font-size:11px;text-align:center;margin-top:8px;display:none}
+.login-cfg{font-size:10px;color:var(--muted);text-align:center;cursor:pointer;
+  margin-top:20px;letter-spacing:1px;text-transform:uppercase;transition:color .2s;}
+.login-cfg:hover{color:var(--rose);}
+.cfg-panel{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--cream2)}
+.cfg-input{width:100%;background:var(--cream);border:1.5px solid var(--cream3);
+  border-radius:10px;padding:10px 14px;color:var(--text);font-size:13px;
+  font-family:'Quicksand',sans-serif;outline:none;margin-bottom:8px;transition:border-color .2s;}
+.cfg-input:focus{border-color:var(--lavender);}
+.cfg-btn{width:100%;padding:10px;background:var(--lavender-pale);border:1.5px solid var(--lavender);
+  border-radius:10px;color:var(--lavender2);font-size:11px;font-weight:700;
+  cursor:pointer;font-family:'Quicksand',sans-serif;letter-spacing:1px;transition:all .2s;}
+.cfg-btn:hover{background:var(--lavender);color:var(--white);}
+
+/* ─── APP ─── */
+#app{display:none}
+.header{
+  background:var(--white);
+  border-bottom:2px solid var(--rose-pale);
+  box-shadow:var(--shadow-sm);
+  position:relative;
+}
+.header-stripe{
+  height:4px;
+  background:linear-gradient(90deg,var(--rose),var(--gold),var(--lavender),var(--mint),var(--rose));
+}
+.header-inner{
+  max-width:780px;margin:0 auto;
+  padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.header-cs{font-family:"Playfair Display",serif;font-size:15px;font-weight:700;color:var(--white);background:linear-gradient(135deg,var(--rose),var(--lavender));width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(232,98,122,.35);flex-shrink:0;}
+.header-brand{
+  font-family:'Playfair Display',serif;font-size:24px;font-weight:700;
+  color:var(--rose);letter-spacing:.5px;
+}
+.header-brand span{font-style:italic;color:var(--lavender);}
+.header-date{font-size:12px;color:var(--text2);letter-spacing:.5px;text-align:center;font-weight:600;background:var(--cream);border-radius:20px;padding:5px 14px;border:1px solid var(--cream3);}
+.header-cfg-btn{
+  background:linear-gradient(135deg,var(--rose-pale),var(--lavender-pale));border:1.5px solid var(--rose3);
+  border-radius:20px;padding:8px 20px;
+  color:var(--rose2);font-size:10px;font-weight:700;
+  cursor:pointer;font-family:'Quicksand',sans-serif;
+  letter-spacing:1.5px;text-transform:uppercase;transition:all .2s;
+  box-shadow:0 2px 8px rgba(232,98,122,.15);
+}
+.header-cfg-btn:hover{background:linear-gradient(135deg,var(--rose),var(--lavender));color:var(--white);border-color:transparent;box-shadow:0 4px 14px rgba(232,98,122,.35);}
+
+/* SETTINGS */
+.settings-panel{
+  display:none;background:var(--white);
+  border-bottom:1px solid var(--rose-pale);
+  padding:24px;
+}
+.settings-inner{max-width:680px;margin:0 auto}
+.settings-title{
+  font-family:'Playfair Display',serif;font-size:18px;color:var(--text);
+  margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;
+}
+.settings-close{background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);}
+.s-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.s-field label{display:block;font-size:10px;font-weight:700;color:var(--text2);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:5px;}
+.s-field input{width:100%;background:var(--cream);border:1.5px solid var(--cream3);
+  border-radius:10px;padding:9px 12px;color:var(--text);font-size:12px;
+  font-family:monospace;outline:none;transition:border-color .2s;}
+.s-field input:focus{border-color:var(--rose);}
+.s-btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.s-btn{padding:9px 20px;border-radius:20px;border:none;font-size:10px;font-weight:700;
+  letter-spacing:1px;cursor:pointer;font-family:'Quicksand',sans-serif;transition:all .2s;}
+.s-btn-rose{background:linear-gradient(135deg,var(--rose),var(--rose3));color:var(--white);}
+.s-btn-lav{background:var(--lavender-pale);border:1.5px solid var(--lavender);color:var(--lavender2);}
+.s-btn-lav:hover{background:var(--lavender);color:var(--white);}
+.s-cloud-info{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.7}
+.s-divider{height:1px;background:var(--cream2);margin:18px 0;position:relative;}
+.s-divider span{position:absolute;top:-8px;left:50%;transform:translateX(-50%);
+  background:var(--white);padding:0 10px;font-size:9px;letter-spacing:2px;
+  text-transform:uppercase;color:var(--muted);}
+.cloud-id-box{background:var(--rose-pale);border:1px solid var(--rose3);
+  border-radius:10px;padding:12px 16px;display:none;margin-top:10px;}
+.cloud-id-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--rose2);margin-bottom:5px;font-weight:700;}
+.cloud-id-val{font-family:monospace;font-size:12px;color:var(--text);}
+
+/* WRAP */
+.wrap{max-width:780px;margin:0 auto;padding:28px 20px 80px;position:relative;z-index:1;}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:24px;
+  background:var(--white);border-radius:16px;padding:6px;
+  box-shadow:var(--shadow-sm);}
+.tab{flex:1;padding:10px 8px;border:none;border-radius:12px;
+  font-size:12px;font-weight:700;cursor:pointer;
+  font-family:'Quicksand',sans-serif;letter-spacing:.5px;
+  transition:all .2s;color:var(--muted);background:transparent;}
+.tab.active{background:linear-gradient(135deg,var(--rose),var(--lavender));
+  color:var(--white);box-shadow:0 3px 10px rgba(232,98,122,.3);}
+.tab:hover:not(.active){color:var(--rose);background:var(--rose-pale);}
+
+/* ADD PAYMENT CARD */
+.add-card{
+  background:var(--white);border-radius:20px;padding:28px;
+  box-shadow:var(--shadow);margin-bottom:20px;
+  border:1.5px solid var(--rose-pale);position:relative;overflow:hidden;
+}
+.add-card::before{
+  content:'';position:absolute;top:-20px;right:-20px;
+  width:100px;height:100px;border-radius:50%;
+  background:radial-gradient(circle,rgba(232,184,75,.12),transparent 70%);
+}
+.add-title{
+  font-family:'Playfair Display',serif;font-size:18px;color:var(--text);
+  margin-bottom:20px;display:flex;align-items:center;gap:8px;
+}
+.add-title span{font-size:20px;}
+.add-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.field-group{display:flex;flex-direction:column;gap:6px}
+.field-label{font-size:10px;font-weight:700;color:var(--text2);
+  letter-spacing:1px;text-transform:uppercase;}
+.field-input{background:var(--cream);border:2px solid var(--cream3);
+  border-radius:12px;padding:12px 16px;color:var(--text);font-size:14px;
+  font-family:'Quicksand',sans-serif;outline:none;width:100%;transition:all .2s;}
+.field-input:focus{border-color:var(--rose);background:var(--white);}
+.field-input::placeholder{color:var(--muted2);}
+.btn-add-pay{
+  width:100%;padding:14px;border:none;border-radius:12px;
+  background:linear-gradient(135deg,var(--rose),var(--lavender));
+  color:var(--white);font-size:14px;font-weight:700;
+  cursor:pointer;font-family:'Quicksand',sans-serif;
+  transition:all .3s;box-shadow:0 4px 14px rgba(232,98,122,.3);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-add-pay:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(232,98,122,.4);}
+
+/* TOTAL CARD */
+.total-card{
+  background:linear-gradient(135deg,var(--rose),var(--lavender));
+  border-radius:20px;padding:24px 28px;
+  margin-bottom:20px;color:var(--white);
+  box-shadow:0 6px 24px rgba(232,98,122,.3);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.total-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.8}
+.total-amount{
+  font-family:'Playfair Display',serif;font-size:36px;font-weight:700;
+  margin-top:4px;
+}
+.total-count{font-size:11px;opacity:.75;margin-top:4px;}
+.total-icon{font-size:48px;opacity:.3;}
+
+/* PAYMENTS LIST */
+.list-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:14px;
+}
+.list-title{
+  font-family:'Playfair Display',serif;font-size:16px;color:var(--text);
+  font-style:italic;
+}
+.empty-state{
+  text-align:center;padding:40px 20px;
+  font-size:14px;color:var(--muted);line-height:2.2;
+}
+.empty-icon{font-size:48px;margin-bottom:8px;}
+
+.payment-row{
+  background:var(--white);border-radius:14px;
+  padding:14px 18px;margin-bottom:8px;
+  display:flex;align-items:center;justify-content:space-between;
+  box-shadow:var(--shadow-sm);border:1.5px solid transparent;
+  transition:all .2s;
+}
+.payment-row:hover{border-color:var(--rose-pale);transform:translateX(2px);}
+.pay-left{display:flex;align-items:center;gap:12px}
+.pay-avatar{
+  width:38px;height:38px;border-radius:50%;
+  background:linear-gradient(135deg,var(--rose-pale),var(--lavender-pale));
+  border:2px solid var(--rose3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;color:var(--rose);
+  flex-shrink:0;
+}
+.pay-name{font-size:14px;font-weight:600;color:var(--text)}
+.pay-time{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.5px}
+.pay-amount{
+  font-family:'Playfair Display',serif;font-size:18px;font-weight:700;
+  color:var(--rose);
+}
+.pay-del{background:none;border:none;color:var(--muted2);cursor:pointer;
+  font-size:16px;margin-left:4px;transition:color .2s;padding:4px;}
+.pay-del:hover{color:var(--rose);}
+.pay-edit{background:none;border:none;color:var(--muted2);cursor:pointer;
+  font-size:14px;margin-left:4px;transition:color .2s;padding:4px;}
+.pay-edit:hover{color:var(--lavender);}
+
+/* REPORT VIEWS */
+.report-card{
+  background:var(--white);border-radius:20px;padding:28px;
+  box-shadow:var(--shadow);border:1.5px solid var(--lavender-pale);
+  margin-bottom:16px;
+}
+.report-title{
+  font-family:'Playfair Display',serif;font-size:20px;color:var(--text);
+  margin-bottom:4px;display:flex;align-items:center;gap:8px;
+}
+.report-sub{font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:20px}
+.report-total{
+  background:linear-gradient(135deg,var(--lavender-pale),var(--rose-pale));
+  border-radius:14px;padding:18px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;border:1.5px solid var(--rose-pale);
+}
+.rt-label{font-size:11px;font-weight:700;color:var(--text2);
+  letter-spacing:1px;text-transform:uppercase;}
+.rt-amount{
+  font-family:'Playfair Display',serif;font-size:28px;font-weight:700;
+  color:var(--lavender);
+}
+.report-table{width:100%;border-collapse:collapse;}
+.report-table th{font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:8px 12px;text-align:left;font-weight:700;
+  border-bottom:2px solid var(--cream2);}
+.report-table td{padding:10px 12px;border-bottom:1px solid var(--cream2);
+  font-size:13px;color:var(--text);}
+.report-table tr:last-child td{border-bottom:none;}
+.report-table td.amount{
+  font-family:'Playfair Display',serif;font-size:15px;
+  font-weight:700;color:var(--rose);text-align:right;}
+.report-table .total-row td{
+  background:linear-gradient(135deg,var(--rose-pale),var(--lavender-pale));
+  font-weight:700;color:var(--text);}
+.report-table .total-row td.amount{color:var(--lavender2);font-size:17px;}
+
+.btn-export{
+  display:flex;align-items:center;gap:6px;
+  padding:10px 20px;border:1.5px solid var(--lavender);border-radius:20px;
+  background:var(--lavender-pale);color:var(--lavender2);
+  font-size:11px;font-weight:700;cursor:pointer;
+  font-family:'Quicksand',sans-serif;letter-spacing:1px;transition:all .2s;
+}
+.btn-export:hover{background:var(--lavender);color:var(--white);}
+
+.week-day{
+  border-left:3px solid var(--rose3);padding-left:12px;margin-bottom:14px;
+}
+.week-day-name{font-size:11px;font-weight:700;color:var(--rose2);
+  letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.week-day-total{font-family:'Playfair Display',serif;font-size:20px;color:var(--text)}
+.week-day-count{font-size:11px;color:var(--muted)}
+
+.month-week{margin-bottom:20px;}
+.month-week-label{
+  font-size:10px;font-weight:700;color:var(--lavender2);
+  letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--lavender-pale);
+}
+
+.nav-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.nav-btn{background:var(--white);border:1.5px solid var(--cream3);border-radius:20px;
+  padding:9px 20px;color:var(--text2);font-size:11px;font-weight:700;
+  cursor:pointer;font-family:'Quicksand',sans-serif;transition:all .25s;
+  box-shadow:0 2px 8px rgba(45,27,58,.08);letter-spacing:.5px;}
+.nav-btn:hover{border-color:var(--rose);color:var(--rose);background:var(--rose-pale);box-shadow:0 4px 14px rgba(232,98,122,.2);}
+.nav-btn:disabled{opacity:.35;cursor:default;box-shadow:none;}
+.nav-label{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
+  color:var(--text);font-style:italic;letter-spacing:.5px;}
+
+@media(max-width:600px){
+  .add-grid{grid-template-columns:1fr}
+  .s-row{grid-template-columns:1fr}
+  .total-icon{display:none}
+  .tabs .tab{font-size:10px;padding:9px 4px}
+  .header-brand{font-size:18px}
+  .wrap{padding:20px 14px 60px}
+}
+
+/* ── PRINT OVERLAY ── */
+#printOverlay{position:fixed;inset:0;z-index:9000;background:#f5f5f3;overflow-y:auto;display:none}
+.print-toolbar{position:sticky;top:0;z-index:9001;background:var(--white);border-bottom:3px solid var(--rose-pale);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow-sm)}
+.print-tb-brand{font-family:'Playfair Display',serif;font-size:18px;color:var(--rose);font-weight:700}
+.print-tb-brand span{font-style:italic;color:var(--lavender)}
+.print-tb-btns{display:flex;gap:8px}
+.print-btn-back{background:transparent;border:1.5px solid var(--cream3);border-radius:20px;color:var(--muted);font-size:10px;font-weight:700;padding:8px 18px;cursor:pointer;font-family:'Quicksand',sans-serif;letter-spacing:1px;transition:all .2s}
+.print-btn-back:hover{border-color:var(--rose);color:var(--rose)}
+.print-btn-pdf{background:linear-gradient(135deg,var(--rose),var(--lavender));border:none;border-radius:20px;color:var(--white);font-size:10px;font-weight:700;padding:8px 20px;cursor:pointer;font-family:'Quicksand',sans-serif;letter-spacing:1px;box-shadow:0 4px 14px rgba(232,98,122,.3);transition:all .2s}
+.print-btn-pdf:hover{transform:translateY(-1px)}
+.print-frame{max-width:760px;margin:28px auto;background:#fff;box-shadow:var(--shadow-lg);padding:48px 52px 44px;border-radius:8px;min-height:400px}
+@media print{*{visibility:hidden!important}#printOverlay{visibility:visible!important;display:block!important;position:fixed!important;top:0!important;left:0!important;right:0!important;bottom:0!important;background:#fff!important;z-index:99999!important;overflow:visible!important}.print-toolbar{display:none!important}.print-frame{box-shadow:none!important;margin:0!important;padding:24px!important;max-width:none!important;border-radius:0!important}#printBody,#printBody *{visibility:visible!important}}
+/* ── FAB ── */
+.fab{position:fixed;bottom:24px;right:20px;z-index:1000;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lavender));border:none;color:var(--white);font-size:26px;font-weight:900;cursor:pointer;box-shadow:0 6px 20px rgba(232,98,122,.4);transition:all .25s;display:none;align-items:center;justify-content:center;font-family:'Playfair Display',serif}
+.fab:hover{transform:scale(1.10) translateY(-2px);box-shadow:0 8px 28px rgba(232,98,122,.55)}
+/* ── QUICK PANEL ── */
+.quick-overlay{position:fixed;inset:0;z-index:1999;background:rgba(45,27,58,.28);backdrop-filter:blur(3px);display:none}
+.quick-overlay.open{display:block}
+.quick-panel{position:fixed;bottom:0;left:0;right:0;z-index:2000;background:var(--white);border-radius:24px 24px 0 0;padding:0 20px 32px;box-shadow:0 -8px 40px rgba(45,27,58,.18);transform:translateY(100%);transition:transform .35s cubic-bezier(.25,.8,.25,1);max-height:85vh;overflow-y:auto}
+.quick-panel.open{transform:translateY(0)}
+.quick-handle{width:40px;height:4px;background:var(--cream3);border-radius:2px;margin:14px auto 20px;cursor:pointer}
+.quick-panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--rose-pale)}
+.quick-panel-title{font-family:'Playfair Display',serif;font-size:20px;color:var(--rose);display:flex;align-items:center;gap:8px}
+.quick-close{background:none;border:none;font-size:22px;color:var(--muted);cursor:pointer;line-height:1;padding:4px;transition:color .2s}
+.quick-close:hover{color:var(--rose)}
+.quick-toast{background:linear-gradient(135deg,var(--mint-pale),#e8f5ee);border:1.5px solid var(--mint);border-radius:14px;padding:14px 18px;margin-bottom:16px;display:none}
+.qt-title{font-size:10px;font-weight:700;color:#1a6b3a;letter-spacing:1px;text-transform:uppercase;margin-bottom:5px}
+.qt-body{font-size:13px;color:var(--text);line-height:1.7}
+.quick-field{margin-bottom:14px}
+.quick-field-label{font-size:10px;font-weight:700;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;display:block}
+.quick-input{background:var(--cream);border:2px solid var(--cream3);border-radius:12px;padding:12px 16px;color:var(--text);font-size:14px;font-family:'Quicksand',sans-serif;outline:none;width:100%;transition:all .2s}
+.quick-input:focus{border-color:var(--rose);background:var(--white)}
+.quick-comision{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--lavender-pale);border-radius:10px;border:1px solid var(--lavender);margin-bottom:16px;cursor:pointer}
+.quick-btn{width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--rose),var(--lavender));color:var(--white);font-size:14px;font-weight:700;cursor:pointer;font-family:'Quicksand',sans-serif;transition:all .3s;box-shadow:0 4px 14px rgba(232,98,122,.3);display:flex;align-items:center;justify-content:center;gap:8px}
+.quick-btn:hover{transform:translateY(-1px)}
+
+/* ── RANGE SELECTOR ── */
+.range-card{background:var(--white);border-radius:20px;padding:24px 28px;box-shadow:var(--shadow);border:1.5px solid var(--lavender-pale);margin-bottom:16px;margin-top:8px}
+.range-title{font-family:'Playfair Display',serif;font-size:17px;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.range-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.range-label{font-size:10px;font-weight:700;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;display:block}
+.range-select{background:var(--cream);border:2px solid var(--cream3);border-radius:12px;padding:10px 14px;color:var(--text);font-size:13px;font-family:'Quicksand',sans-serif;outline:none;width:100%;transition:all .2s;cursor:pointer}
+.range-select:focus{border-color:var(--lavender)}
+.btn-range{width:100%;padding:12px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--lavender),var(--rose));color:var(--white);font-size:13px;font-weight:700;cursor:pointer;font-family:'Quicksand',sans-serif;transition:all .3s;box-shadow:0 4px 14px rgba(155,126,200,.3);margin-bottom:14px}
+.btn-range:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(155,126,200,.4)}
+.range-result{background:linear-gradient(135deg,var(--lavender-pale),var(--rose-pale));border:1.5px solid var(--lavender);border-radius:14px;padding:18px 22px;display:none}
+.range-result-title{font-size:10px;font-weight:700;color:var(--lavender2);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px}
+.range-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.range-row-label{font-size:12px;font-weight:600;color:var(--text2)}
+.range-row-val{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--text)}
+.range-row.comision .range-row-val{color:var(--lavender2)}
+.range-divider{height:1.5px;background:rgba(155,126,200,.25);margin:10px 0}
+.range-neto-label{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)}
+.range-neto-val{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--lavender2)}
+.range-btn-print{margin-top:14px;width:100%;padding:11px;border:1.5px solid var(--lavender);border-radius:12px;background:transparent;color:var(--lavender2);font-size:12px;font-weight:700;cursor:pointer;font-family:'Quicksand',sans-serif;transition:all .2s}
+.range-btn-print:hover{background:var(--lavender);color:var(--white)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-deco">
+    <div class="login-petal petal-1"></div>
+    <div class="login-petal petal-2"></div>
+    <div class="login-petal petal-3"></div>
+    <div class="login-petal petal-4"></div>
+  </div>
+  <div class="login-card">
+    <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--lavender);text-align:center;margin-bottom:4px;letter-spacing:3px">CS</div>
+    <div class="login-brand">Carla Scherer</div>
+    <div class="login-sub">Finanzas</div>
+    <label class="login-label">Contrase&ntilde;a de Acceso</label>
+    <input class="login-input" type="password" id="pwdInput" placeholder="&bull; &bull; &bull; &bull; &bull; &bull;" autocomplete="off"/>
+    <button class="login-btn" id="loginBtn">Ingresar</button>
+    <div class="login-err" id="loginErr">Contrase&ntilde;a incorrecta</div>
+    <div class="login-cfg" id="ctog">Configuraci&oacute;n</div>
+    <div class="cfg-panel" id="cpanel">
+      <input class="cfg-input" type="password" id="cfgAdmin" placeholder="Contrase&ntilde;a administrador"/>
+      <input class="cfg-input" type="password" id="cfgPwd" placeholder="Nueva contrase&ntilde;a de acceso"/>
+      <button class="cfg-btn" id="cfgBtn">Guardar cambios</button>
+      <div id="cfgStatus" style="font-size:10px;text-align:center;margin-top:8px;color:var(--mint)"></div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="header">
+    <div class="header-stripe"></div>
+    <div class="header-inner">
+      <div class="header-cs">CS</div>
+      <div class="header-brand">Carla Scherer</div>
+      <div class="header-date" id="headerDate"></div>
+      <button class="header-cfg-btn" id="btnSettings">Ajustes</button>
+    </div>
+  </div>
+
+  <div class="settings-panel" id="settingsPanel">
+    <div class="settings-inner">
+      <div class="settings-title">
+        Ajustes <button class="settings-close" id="btnCloseSettings">&times;</button>
+      </div>
+      <div class="s-row">
+        <div class="s-field"><label>Contrase&ntilde;a Admin</label><input type="password" id="s_admin" placeholder="admin2024"/></div>
+        <div class="s-field"><label>Nueva Contrase&ntilde;a</label><input type="password" id="s_pwd" placeholder="Nueva contrase&ntilde;a"/></div>
+      </div>
+      <div class="s-btn-row">
+        <button class="s-btn s-btn-rose" id="s_savePwd">Guardar contrase&ntilde;a</button>
+      </div>
+      <div class="s-divider"><span>Instalar como App</span></div>
+      <div class="s-cloud-info">Instal&aacute; la agenda en tu dispositivo para usarla como una app normal, sin abrir el navegador.</div>
+      <div class="s-btn-row">
+        <button class="s-btn s-btn-rose" id="installBtn" style="display:none" onclick="installApp()">&#128640; Instalar en este dispositivo</button>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8">
+        <strong>&#128241; M&oacute;vil:</strong> Men&uacute; del navegador → <em>"Agregar a pantalla de inicio"</em><br>
+        <strong>&#128187; PC:</strong> En Chrome, el &iacute;cono ⊕ en la barra de direcci&oacute;n → <em>"Instalar"</em>
+      </div>
+      <div class="s-divider"><span>Sincronizaci&oacute;n</span></div>
+      <div class="s-cloud-info">Sin cuenta. Puls&aacute; <strong>Crear nube</strong> y copi&aacute; el ID en el otro dispositivo.</div>
+      <div class="s-field" style="margin-bottom:12px"><label>ID de Sync</label><input type="text" id="s_binId" placeholder="Peg&aacute; el ID aqu&iacute;" style="font-family:monospace"/></div>
+      <div class="s-btn-row">
+        <button class="s-btn s-btn-rose" id="s_createCloud">Crear nube</button>
+        <button class="s-btn s-btn-lav" id="s_saveCloud">Conectar con ID</button>
+        <span id="s_cloudStatus" style="font-size:10px;color:var(--mint);letter-spacing:1px"></span>
+      </div>
+      <div class="cloud-id-box" id="s_binIdDisplay">
+        <div class="cloud-id-label">Tu ID de Sync</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+          <div class="cloud-id-val" id="s_binIdVal"></div>
+          <button class="s-btn s-btn-lav" id="s_copyBinId" style="padding:5px 14px">Copiar</button>
+        </div>
+      </div>
+      <div class="s-divider"><span>&#10024; Sincronizaci&oacute;n Manual (siempre funciona)</span></div>
+      <div class="s-cloud-info" style="background:var(--lavender-pale);border:1px solid var(--lavender);border-radius:10px;padding:10px 12px">&#128161; <strong>Recomendado:</strong> Gener&aacute; el c&oacute;digo, copi&aacute;lo y mand&aacute;lo por WhatsApp al otro dispositivo. Gener&aacute;lo aqu&iacute;, copi&aacute;lo y peg&aacute;lo en el otro dispositivo.</div>
+      <textarea id="s_syncCode" placeholder="El c&oacute;digo aparecer&aacute; aqu&iacute;..." style="width:100%;height:60px;background:var(--cream);border:1.5px solid var(--cream3);border-radius:10px;padding:10px;font-family:monospace;font-size:11px;resize:none;outline:none;margin-bottom:10px;color:var(--text)"></textarea>
+      <div class="s-btn-row">
+        <button class="s-btn s-btn-rose" id="s_genCode">Generar c&oacute;digo</button>
+        <button class="s-btn s-btn-lav" id="s_importCode">Importar c&oacute;digo</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tab active" id="tabHoy" onclick="switchTab('hoy')">Hoy</button>
+      <button class="tab" id="tabSemana" onclick="switchTab('semana')">Semana</button>
+      <button class="tab" id="tabMes" onclick="switchTab('mes')">Mes</button>
+    </div>
+    <div id="mainWrap"></div>
+  </div>
+</div>
+
+<script>
+var accessPwd = localStorage.getItem("fin_pwd") || "100798";
+var ADMIN = "admin2024";
+var DB = loadDB();
+var cloudBinId = localStorage.getItem("fin_bin_id") || "";
+var BLOB_URL = "https://jsonblob.com/api/jsonBlob";
+var currentTab = "hoy";
+var selectedDate = today();
+var weekOffset = 0;
+var monthOffset = 0;
+
+function loadDB(){
+  try{ return JSON.parse(localStorage.getItem("fin_db") || '{"payments":[]}'); }
+  catch(e){ return {payments:[]}; }
+}
+function saveDB(){
+  localStorage.setItem("fin_db", JSON.stringify(DB));
+  if(cloudBinId) cloudSave();
+}
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,5); }
+function esc(v){ return (v||"").toString().replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+function fmt(n){ return parseFloat(n||0).toLocaleString("es-PY",{minimumFractionDigits:0,maximumFractionDigits:2}); }
+function today(){ return new Date().toISOString().slice(0,10); }
+function getWeek(d){ var dt=new Date(d); var day=dt.getDay()||7; dt.setDate(dt.getDate()+4-day); var y=dt.getFullYear(); var w1=new Date(y,0,4); return Math.ceil(((dt-w1)/86400000+1)/7)+"-"+y; }
+function getMonthKey(d){ return d.slice(0,7); }
+
+// CLOUD
+function cloudSave(cb){ if(!cloudBinId){if(cb)cb();return;} fetch(BLOB_URL+"/"+cloudBinId,{method:"PUT",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(DB)}).then(function(){if(cb)cb();}).catch(function(e){console.warn(e);if(cb)cb();}); }
+function cloudCreate(cb){ fetch(BLOB_URL,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(DB)}).then(function(r){var loc=r.headers.get("Location")||"";var id=loc.split("/").pop();if(id){cloudBinId=id;localStorage.setItem("fin_bin_id",id);}if(cb)cb(!!id);}).catch(function(e){console.warn(e);if(cb)cb(false);}); }
+function cloudLoad(cb){ if(!cloudBinId){if(cb)cb(false);return;} fetch(BLOB_URL+"/"+cloudBinId,{headers:{"Accept":"application/json"}}).then(function(r){return r.json();}).then(function(d){if(d&&d.payments){DB=d;saveDB();if(cb)cb(true);}else{if(cb)cb(false);}}).catch(function(e){console.warn(e);if(cb)cb(false);}); }
+
+// AUTH
+document.getElementById("loginBtn").addEventListener("click",doLogin);
+document.getElementById("pwdInput").addEventListener("keydown",function(e){if(e.key==="Enter")doLogin();});
+document.getElementById("ctog").addEventListener("click",function(){ var p=document.getElementById("cpanel"); p.style.display=p.style.display==="block"?"none":"block"; });
+document.getElementById("cfgBtn").addEventListener("click",function(){
+  var admin=document.getElementById("cfgAdmin").value, pwd=document.getElementById("cfgPwd").value.trim(), st=document.getElementById("cfgStatus");
+  if(admin!==(localStorage.getItem("fin_admin")||ADMIN)){st.style.color="var(--rose)";st.textContent="Admin incorrecto";return;}
+  if(pwd){accessPwd=pwd;localStorage.setItem("fin_pwd",pwd);}
+  localStorage.setItem("fin_admin",admin); st.textContent="Guardado";
+  setTimeout(function(){document.getElementById("cpanel").style.display="none";st.textContent="";},2000);
+});
+function doLogin(){
+  if(document.getElementById("pwdInput").value===accessPwd){
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("app").style.display="block";
+    updateHeaderDate();
+    if(cloudBinId){cloudLoad(function(){renderTab();initSettings();});}
+    else{renderTab();initSettings();var fab=document.getElementById("btnFAB");if(fab)fab.style.display="flex";}
+  } else {
+    document.getElementById("loginErr").style.display="block";
+    document.getElementById("pwdInput").value=""; 
+// ── QUICK PANEL ──────────────────────────────────────────────────────────
+function quickContextDate(){
+  if(currentTab==="hoy") return selectedDate||today();
+  if(currentTab==="semana"){
+    var now=new Date(); now.setDate(now.getDate()+weekOffset*7);
+    var day=now.getDay()||7;
+    var mon=new Date(now); mon.setDate(now.getDate()-day+1);
+    return mon.toISOString().slice(0,10);
+  }
+  if(currentTab==="mes"){
+    var now2=new Date(); now2.setMonth(now2.getMonth()+monthOffset);
+    var y=now2.getFullYear(), m=now2.getMonth();
+    return y+"-"+(m<9?"0":"")+(m+1)+"-01";
+  }
+  return today();
+}
+function openQuick(){
+  var dateInput=document.getElementById("qDate");
+  dateInput.value=quickContextDate();
+  document.getElementById("quickToast").style.display="none";
+  document.getElementById("qClient").value="";
+  document.getElementById("qAmount").value="";
+  document.getElementById("qComision").checked=false;
+  document.getElementById("quickPanel").classList.add("open");
+  document.getElementById("quickOverlay").classList.add("open");
+  setTimeout(function(){document.getElementById("qClient").focus();},350);
+}
+function closeQuick(){
+  document.getElementById("quickPanel").classList.remove("open");
+  document.getElementById("quickOverlay").classList.remove("open");
+}
+function saveQuick(){
+  var name=document.getElementById("qClient").value.trim();
+  var amount=parseFloat(document.getElementById("qAmount").value);
+  if(!name){document.getElementById("qClient").focus();return;}
+  if(!amount||amount<=0){document.getElementById("qAmount").focus();return;}
+  var dateVal=document.getElementById("qDate").value||today();
+  var now=new Date();
+  var time=now.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
+  var isComision=document.getElementById("qComision").checked;
+  DB.payments.push({id:uid(),date:dateVal,time:time,client:name,amount:amount,comision:isComision});
+  saveDB();
+  var sign=isComision?"-":"";
+  document.getElementById("quickToastBody").innerHTML=
+    "<strong>"+esc(name)+"</strong> &nbsp;·&nbsp; "+sign+fmt(amount)
+    +(isComision?" &nbsp;<span style='color:var(--lavender2);font-size:11px'>comisión</span>":"");
+  document.getElementById("quickToast").style.display="block";
+  document.getElementById("qClient").value="";
+  document.getElementById("qAmount").value="";
+  document.getElementById("qComision").checked=false;
+  document.getElementById("qClient").focus();
+  if(currentTab==="hoy"&&dateVal===selectedDate)renderHoy();
+  else if(currentTab==="semana")renderSemana();
+  else if(currentTab==="mes")renderMes();
+}
+document.getElementById("btnFAB").addEventListener("click",openQuick);
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape")closeQuick();
+});
+
+
+document.getElementById("pwdInput").focus();
+  }
+}
+function updateHeaderDate(){
+  var d=new Date(); var opts={weekday:"long",day:"numeric",month:"long",year:"numeric"};
+  document.getElementById("headerDate").textContent=d.toLocaleDateString("es-ES",opts);
+}
+function initSettings(){
+  document.getElementById("btnSettings").addEventListener("click",function(){ var p=document.getElementById("settingsPanel"); p.style.display=p.style.display==="block"?"none":"block"; if(cloudBinId){document.getElementById("s_binIdDisplay").style.display="block";document.getElementById("s_binIdVal").textContent=cloudBinId;} });
+  document.getElementById("btnCloseSettings").addEventListener("click",function(){document.getElementById("settingsPanel").style.display="none";});
+  document.getElementById("s_savePwd").addEventListener("click",function(){ var admin=document.getElementById("s_admin").value, pwd=document.getElementById("s_pwd").value.trim(); if(admin!==(localStorage.getItem("fin_admin")||ADMIN)){alert("Admin incorrecto.");return;} if(pwd){accessPwd=pwd;localStorage.setItem("fin_pwd",pwd);} localStorage.setItem("fin_admin",admin); alert("Contrase&ntilde;a actualizada."); });
+  document.getElementById("s_createCloud").addEventListener("click",function(){
+    var st=document.getElementById("s_cloudStatus");
+    st.style.color="var(--muted)";
+    st.textContent="Conectando...";
+    cloudCreate(function(ok){
+      if(ok){
+        st.style.color="var(--mint)";
+        st.textContent="✅ Nube creada";
+        document.getElementById("s_binIdDisplay").style.display="block";
+        document.getElementById("s_binIdVal").textContent=cloudBinId;
+      } else {
+        st.style.color="var(--rose)";
+        st.textContent="❌ Sin conexión";
+        // Auto-scroll to sync code section
+        document.getElementById("s_syncCode").scrollIntoView({behavior:"smooth"});
+        setTimeout(function(){
+          document.getElementById("s_genCode").style.boxShadow="0 0 0 3px rgba(232,98,122,.4)";
+          setTimeout(function(){document.getElementById("s_genCode").style.boxShadow="";},2000);
+        },500);
+        alert("La nube no está disponible en esta red.\n\nUsá el Código Manual que está justo abajo — es igual de seguro y funciona siempre.\n\n1. Pulsá GENERAR CÓDIGO\n2. Mandalo por WhatsApp al otro dispositivo\n3. En el otro dispositivo pegá el código e IMPORTAR");
+      }
+    });
+  });
+  document.getElementById("s_saveCloud").addEventListener("click",function(){ var binId=document.getElementById("s_binId").value.trim(), st=document.getElementById("s_cloudStatus"); if(!binId){alert("Peg&aacute; el ID primero.");return;} st.textContent="Conectando..."; cloudBinId=binId; localStorage.setItem("fin_bin_id",binId); cloudLoad(function(ok){ st.textContent=ok?"Sincronizado":"ID no encontrado"; document.getElementById("s_binIdDisplay").style.display="block"; document.getElementById("s_binIdVal").textContent=cloudBinId; if(ok)renderTab(); }); });
+  document.getElementById("s_copyBinId").addEventListener("click",function(){ var id=document.getElementById("s_binIdVal").textContent; navigator.clipboard.writeText(id).then(function(){alert("ID copiado.");}).catch(function(){alert("Tu ID: "+id);}); });
+  document.getElementById("s_genCode").addEventListener("click",function(){
+    var json=JSON.stringify(DB);
+    var b64=btoa(unescape(encodeURIComponent(json)));
+    var el=document.getElementById("s_syncCode");
+    el.value=b64;el.select();
+    try{document.execCommand("copy");alert("\u2705 C\u00f3digo copiado. Peg\u00e1lo en el otro dispositivo.");}
+    catch(e){alert("C\u00f3digo generado. Copi\u00e1lo manualmente.");}
+  });
+  document.getElementById("s_importCode").addEventListener("click",function(){
+    var el=document.getElementById("s_syncCode");
+    if(!el.value.trim()){alert("Peg\u00e1 el c\u00f3digo primero.");return;}
+    try{
+      var json=decodeURIComponent(escape(atob(el.value.trim())));
+      var parsed=JSON.parse(json);
+      if(!parsed.payments)throw new Error("C\u00f3digo inv\u00e1lido");
+      var existing=DB.payments.map(function(p){return p.id;});
+      var added=0;
+      parsed.payments.forEach(function(p){if(!existing.includes(p.id)){DB.payments.push(p);added++;}});
+      saveDB();alert("\u2705 "+added+" cobros importados.");renderTab();
+    }catch(err){alert("Error: "+err.message);}
+  });
+}
+
+function switchTab(tab){
+  currentTab=tab;
+  ["hoy","semana","mes"].forEach(function(t){ document.getElementById("tab"+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle("active",t===tab); });
+  renderTab();
+}
+function renderTab(){
+  if(currentTab==="hoy") renderHoy();
+  else if(currentTab==="semana") renderSemana();
+  else renderMes();
+}
+
+// ── HOY ──
+function renderHoy(){
+  var wrap=document.getElementById("mainWrap");
+  var todayStr=selectedDate;
+  var todayPays=DB.payments.filter(function(p){return p.date===todayStr;});
+  var adelaidePays=todayPays.filter(function(p){return p.comision===true||(p.client||"").toLowerCase().indexOf("adelaide")>=0;});
+  var adelaideTotal=adelaidePays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+  var subtotal=todayPays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+  var regularSubtotal=subtotal-adelaideTotal;
+  var total=regularSubtotal-adelaideTotal;
+
+  // Date navigation bar
+  var d=new Date(todayStr+"T12:00:00");
+  var prev=new Date(d); prev.setDate(d.getDate()-1);
+  var next=new Date(d); next.setDate(d.getDate()+1);
+  var prevStr=prev.toISOString().slice(0,10);
+  var nextStr=next.toISOString().slice(0,10);
+  var isToday=(todayStr===today());
+  var dateLabel=d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+  var h="<div style='display:flex;align-items:center;justify-content:space-between;background:var(--white);border-radius:14px;padding:10px 16px;margin-bottom:14px;box-shadow:var(--shadow-sm)'>"
+    +"<button class='nav-btn' id='btnDayPrev'>&larr;</button>"
+    +"<div style='text-align:center'>"
+    +"<input type='date' id='datePicker' value='"+todayStr+"' style='background:transparent;border:none;font-family:Nunito,sans-serif;font-size:12px;font-weight:700;color:var(--rose);cursor:pointer;outline:none'/>"
+    +"<div style='font-size:10px;color:var(--muted);text-transform:capitalize;margin-top:2px'>"+dateLabel+"</div></div>"
+    +"<button class='nav-btn' id='btnDayNext' "+(isToday?"disabled style='opacity:.3'":"")+">&rarr;</button>"
+    +"</div>";
+
+  h+="<div class='add-card'>"
+    +"<div class='add-title'><span>✿</span> Registrar Cobro</div>"
+    +"<div class='add-grid'>"
+    +"<div class='field-group'><label class='field-label'>Nombre del Cliente</label>"
+    +"<input class='field-input' type='text' id='clientName' placeholder='Nombre de la clienta...'/></div>"
+    +"<div class='field-group'><label class='field-label'>Monto del Pago</label>"
+    +"<input class='field-input' type='number' id='clientAmount' placeholder='0.00' step='0.01' min='0'/></div>"
+    +"</div>"
+    +"<div style='display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px 14px;background:var(--lavender-pale);border-radius:10px;border:1px solid var(--lavender)'>"
+    +"<input type='checkbox' id='isComision' style='width:18px;height:18px;accent-color:var(--lavender);cursor:pointer'/>"
+    +"<label for='isComision' style='font-size:13px;font-weight:600;color:var(--lavender2);cursor:pointer'>Es comisi&oacute;n / gasto (se resta del total)</label>"
+    +"</div>"
+    +"<button class='btn-add-pay' id='btnAddPay'><span>✦</span> Agregar Cobro</button>"
+    +"</div>";
+
+  if(adelaideTotal>0){
+    h+="<div class='total-card'>"
+      +"<div style='width:100%'>"
+      +"<div class='total-label'>Resumen del D&iacute;a</div>"
+      +"<div style='display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.2)'>"
+      +"<span style='font-size:12px;color:rgba(255,255,255,.8)'>Subtotal cobros</span>"
+      +"<span style='font-family:Lora,serif;font-size:20px;font-weight:700;color:#fff'>"+fmt(regularSubtotal)+"</span></div>"
+      +"<div style='display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.2)'>"
+      +"<span style='font-size:12px;color:rgba(255,255,255,.8)'>Comisi&oacute;n Adelaide</span>"
+      +"<span style='font-family:Lora,serif;font-size:20px;font-weight:700;color:#fff'>-"+fmt(adelaideTotal)+"</span></div>"
+      +"<div style='display:flex;justify-content:space-between;align-items:center;margin-top:8px'>"
+      +"<span style='font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase'>Total Neto</span>"
+      +"<span style='font-family:Lora,serif;font-size:28px;font-weight:700;color:#fff'>"+fmt(total)+"</span></div>"
+      +"</div></div>";
+  } else {
+    h+="<div class='total-card'>"
+      +"<div><div class='total-label'>Total del D&iacute;a</div>"
+      +"<div class='total-amount'>"+fmt(total)+"</div>"
+      +"<div class='total-count'>"+todayPays.length+" cobro"+(todayPays.length!==1?"s":"")+" registrado"+(todayPays.length!==1?"s":"")+"</div></div>"
+      +"<div class='total-icon'>✿</div></div>";
+  }
+
+  h+="<div class='list-header'>"
+    +"<div class='list-title'>Cobros de hoy</div>"
+    +"<button class='btn-export' id='btnDailyReport'>&#128197; Informe del D&iacute;a</button>"
+    +"</div>";
+
+  if(!todayPays.length){
+    h+="<div class='empty-state'><div class='empty-icon' style='font-family:Playfair Display,serif;font-size:32px;color:var(--lavender);letter-spacing:3px'>CS</div><div style='font-family:Playfair Display,serif;font-size:16px;color:var(--rose);margin:4px 0 8px'>Carla Scherer</div>Todav&iacute;a no hay cobros registrados hoy.<br>&#161;Agreg&aacute; el primero arriba!</div>";
+  } else {
+    for(var i=todayPays.length-1;i>=0;i--){
+      var p=todayPays[i];
+      var initials=(p.client||"?").split(" ").map(function(w){return w[0];}).join("").substring(0,2).toUpperCase();
+      var time=p.time||"";
+      var isAdelaide=p.comision===true||(p.client||"").toLowerCase().indexOf("adelaide")>=0;
+      h+="<div class='payment-row'"+(isAdelaide?" style='border-left:3px solid var(--lavender)'":"")+">"
+        +"<div class='pay-left'><div class='pay-avatar'"+(isAdelaide?" style='border-color:var(--lavender);color:var(--lavender2)'":"")+"'>"+initials+"</div>"
+        +"<div><div class='pay-name'>"+esc(p.client)+"</div><div class='pay-time'>"+time+(isAdelaide?" &nbsp;&#128176; comisi&oacute;n":"")+"</div></div></div>"
+        +"<div style='display:flex;align-items:center;gap:4px'>"
+        +"<div class='pay-amount'"+(isAdelaide?" style='color:var(--lavender)'":"")+">"+(isAdelaide?"-":"")+fmt(p.amount)+"</div>"
+        +"<button class='pay-edit' data-id='"+p.id+"' data-client='"+esc(p.client)+"' data-amount='"+p.amount+"' title='Editar'>&#9998;</button>"
+        +"<button class='pay-del' data-id='"+p.id+"'>&#215;</button></div></div>";
+    }
+  }
+
+  // Tools row
+  h+="<div style='display:flex;gap:8px;margin-top:20px;flex-wrap:wrap'>"
+    +"<button class='btn-export' id='btnExport'>&#128229; Exportar backup</button>"
+    +"<button class='btn-export' id='btnImport'>&#128228; Importar backup</button>"
+    +"</div>";
+
+  wrap.innerHTML=h;
+  document.getElementById("clientName").focus();
+  document.getElementById("btnDayPrev").addEventListener("click",function(){
+    var d=new Date(selectedDate+"T12:00:00"); d.setDate(d.getDate()-1);
+    selectedDate=d.toISOString().slice(0,10); renderHoy();
+  });
+  document.getElementById("btnDayNext").addEventListener("click",function(){
+    var d=new Date(selectedDate+"T12:00:00"); d.setDate(d.getDate()+1);
+    var next=d.toISOString().slice(0,10);
+    if(next<=today()){selectedDate=next;renderHoy();}
+  });
+  document.getElementById("datePicker").addEventListener("change",function(){
+    if(this.value&&this.value<=today()){selectedDate=this.value;renderHoy();}
+  });
+  document.getElementById("btnAddPay").addEventListener("click",addPayment);
+  document.getElementById("clientName").addEventListener("keydown",function(e){if(e.key==="Enter")document.getElementById("clientAmount").focus();});
+  document.getElementById("clientAmount").addEventListener("keydown",function(e){if(e.key==="Enter")addPayment();});
+  document.getElementById("btnDailyReport").addEventListener("click",function(){genDailyReport(todayStr);});
+  document.getElementById("btnExport").addEventListener("click",exportData);
+  document.getElementById("btnImport").addEventListener("click",importData);
+  var dels=wrap.querySelectorAll(".pay-del");
+  for(var d=0;d<dels.length;d++) dels[d].addEventListener("click",(function(id){return function(){ if(confirm("¿Eliminar este cobro?")){DB.payments=DB.payments.filter(function(p){return p.id!==id;});saveDB();renderHoy();} };})(dels[d].dataset.id));
+  var edits=wrap.querySelectorAll(".pay-edit");
+  for(var e=0;e<edits.length;e++) edits[e].addEventListener("click",(function(id,client,amount){return function(){
+    var newClient=prompt("Nombre del cliente:",client);
+    if(newClient===null) return;
+    var newAmount=prompt("Nuevo monto:",amount);
+    if(newAmount===null) return;
+    newAmount=parseFloat(newAmount);
+    if(isNaN(newAmount)||newAmount<=0){alert("Monto inválido.");return;}
+    for(var i=0;i<DB.payments.length;i++){
+      if(DB.payments[i].id===id){
+        DB.payments[i].client=newClient.trim();
+        DB.payments[i].amount=newAmount;
+        // isComision preserved (not overwritten)
+        break;
+      }
+    }
+    saveDB();renderHoy();
+  };})(edits[e].dataset.id, edits[e].dataset.client, edits[e].dataset.amount));
+}
+
+function addPayment(){
+  var name=document.getElementById("clientName").value.trim();
+  var amount=parseFloat(document.getElementById("clientAmount").value);
+  if(!name){alert("Ingres&aacute; el nombre de la clienta.");return;}
+  if(!amount||amount<=0){alert("Ingres&aacute; un monto v&aacute;lido.");return;}
+  var now=new Date();
+  var time=now.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
+  var isComision=document.getElementById("isComision")&&document.getElementById("isComision").checked;
+  DB.payments.push({id:uid(),date:selectedDate,time:time,client:name,amount:amount,comision:isComision});
+  saveDB();
+  document.getElementById("clientName").value="";
+  document.getElementById("clientAmount").value="";
+  renderHoy();
+  document.getElementById("clientName").focus();
+}
+
+// ── SEMANA ──
+function renderSemana(){
+  var wrap=document.getElementById("mainWrap");
+  // Calculate week start/end based on offset
+  var now=new Date(); now.setDate(now.getDate()+weekOffset*7);
+  var day=now.getDay()||7;
+  var mon=new Date(now); mon.setDate(now.getDate()-day+1);
+  var sun=new Date(mon); sun.setDate(mon.getDate()+6);
+
+  var weekPays=DB.payments.filter(function(p){
+    var pd=new Date(p.date+"T12:00:00");
+    return pd>=mon&&pd<=sun;
+  });
+  var weekTotal=weekPays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+
+  var fmtDate2=function(d){return d.toLocaleDateString("es-ES",{day:"numeric",month:"short"});};
+  var weekLabel=fmtDate2(mon)+" — "+fmtDate2(sun)+", "+sun.getFullYear();
+
+  var h="<div class='nav-row'>"
+    +"<button class='nav-btn' id='btnWeekPrev'>&larr; Anterior</button>"
+    +"<div class='nav-label'>"+weekLabel+"</div>"
+    +"<button class='nav-btn' id='btnWeekNext'>Siguiente &rarr;</button>"
+    +"</div>";
+
+  h+="<div class='report-card'>"
+    +"<div class='report-title'><span>✦</span> Resumen Semanal</div>"
+    +"<div class='report-sub'>"+weekLabel+"</div>"
+    +"<div class='report-total'>"
+    +"<div><div class='rt-label'>Total de la Semana</div><div class='rt-amount'>"+fmt(weekTotal)+"</div>"
+    +"<div style='font-size:11px;color:var(--muted);margin-top:2px'>"+weekPays.length+" cobro"+(weekPays.length!==1?"s":"")+"</div></div>"
+    +"<span style='font-size:40px;opacity:.25'>💜</span></div>";
+
+  // Show days of the week
+  var days=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
+  for(var i=0;i<7;i++){
+    var dayDate=new Date(mon); dayDate.setDate(mon.getDate()+i);
+    var dayStr=dayDate.toISOString().slice(0,10);
+    var dayPays=weekPays.filter(function(p){return p.date===dayStr;});
+    var dayTotal=dayPays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+    if(dayPays.length||dayDate<=new Date()){
+      h+="<div class='week-day'>"
+        +"<div class='week-day-name'>"+days[i]+" "+dayDate.toLocaleDateString("es-ES",{day:"numeric",month:"short"})+"</div>"
+        +"<div class='week-day-total'>"+fmt(dayTotal)+"</div>"
+        +"<div class='week-day-count'>"+dayPays.length+" cobro"+(dayPays.length!==1?"s":"")+"</div></div>";
+    }
+  }
+
+  h+="<div style='display:flex;justify-content:flex-end;margin-top:16px'>"
+    +"<button class='btn-export' id='btnWeekReport'>&#128197; Informe Semanal</button></div>";
+  h+="</div>";
+
+  wrap.innerHTML=h;
+  document.getElementById("btnWeekPrev").addEventListener("click",function(){weekOffset--;renderSemana();});
+  document.getElementById("btnWeekNext").addEventListener("click",function(){weekOffset++;renderSemana();});
+  document.getElementById("btnWeekReport").addEventListener("click",function(){genWeekReport(mon,sun,weekTotal,weekPays);});
+}
+
+// ── MES ──
+function renderMes(){
+  var wrap=document.getElementById("mainWrap");
+  var now=new Date();
+  now.setMonth(now.getMonth()+monthOffset);
+  var year=now.getFullYear(), month=now.getMonth();
+  var monthKey=year+"-"+(month<9?"0":"")+(month+1);
+  var monthPays=DB.payments.filter(function(p){return p.date.slice(0,7)===monthKey;});
+  var monthTotal=monthPays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+  var monthNames=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  var monthLabel=monthNames[month]+" "+year;
+
+  var h="<div class='nav-row'>"
+    +"<button class='nav-btn' id='btnMonthPrev'>&larr; Anterior</button>"
+    +"<div class='nav-label'>"+monthLabel+"</div>"
+    +"<button class='nav-btn' id='btnMonthNext'>Siguiente &rarr;</button>"
+    +"</div>";
+
+  var adelaideTotApp=monthPays.filter(function(p){return p.comision===true||(p.client||'').toLowerCase().indexOf('adelaide')>=0;}).reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+  var regularTotApp=monthTotal-adelaideTotApp;
+  var netoApp=regularTotApp-adelaideTotApp;
+
+  h+="<div class='report-card'>"
+    +"<div class='report-title'><span>✿</span> Resumen Mensual</div>"
+    +"<div class='report-sub'>"+monthLabel+"</div>"
+    +"<div class='report-total' style='display:block;padding:16px 20px'>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:8px'>"
+    +"<div><div class='rt-label'>Cobros clientes</div><div style='font-size:10px;color:var(--muted);margin-top:2px'>"+monthPays.length+" cobro"+(monthPays.length!==1?'s':'')+"</div></div>"
+    +"<div class='rt-amount'>"+fmt(regularTotApp)+"</div></div>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;padding:7px 10px;background:var(--lavender-pale);border-radius:8px;margin-bottom:8px'>"
+    +"<span style='font-size:11px;font-weight:700;color:var(--lavender2)'>Comisión Adelaide</span>"
+    +"<span style='font-family:Playfair Display,serif;font-size:16px;font-weight:700;color:var(--lavender2)'>-"+fmt(adelaideTotApp)+"</span></div>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;border-top:1.5px solid rgba(155,126,200,.25);padding-top:8px'>"
+    +"<span style='font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text)'>Total Neto</span>"
+    +"<div class='rt-amount' style='color:var(--lavender)'>"+fmt(netoApp)+"</div></div></div>";
+
+  // Group by weeks
+  var weeks={};
+  monthPays.forEach(function(p){
+    var d=new Date(p.date+"T12:00:00");
+    var weekNum=Math.ceil(d.getDate()/7);
+    var wk="Semana "+weekNum;
+    if(!weeks[wk])weeks[wk]={total:0,count:0};
+    weeks[wk].total+=parseFloat(p.amount||0);
+    weeks[wk].count++;
+  });
+  for(var wk in weeks){
+    h+="<div class='week-day'>"
+      +"<div class='week-day-name'>"+wk+"</div>"
+      +"<div class='week-day-total'>"+fmt(weeks[wk].total)+"</div>"
+      +"<div class='week-day-count'>"+weeks[wk].count+" cobro"+(weeks[wk].count!==1?"s":"")+"</div></div>";
+  }
+  if(!monthPays.length){
+    h+="<div class='empty-state' style='padding:20px 0'><div class='empty-icon'>🌷</div>Sin cobros este mes.</div>";
+  }
+
+  h+="<div style='display:flex;justify-content:flex-end;margin-top:16px'>"
+    +"<button class='btn-export' id='btnMonthReport'>&#128197; Informe Mensual</button></div>";
+  h+="</div>";
+
+  wrap.innerHTML=h;
+  document.getElementById("btnMonthPrev").addEventListener("click",function(){monthOffset--;renderMes();});
+  document.getElementById("btnMonthNext").addEventListener("click",function(){monthOffset++;renderMes();});
+  document.getElementById("btnMonthReport").addEventListener("click",function(){genMonthReport(monthLabel,monthTotal,monthPays,weeks);});
+  renderRangeSelector();
+}
+
+// ── PDF REPORTS ──
+function reportCSS(){
+  return "@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap');"
+    +"*{box-sizing:border-box;margin:0;padding:0}"
+    +"body{font-family:'Quicksand',sans-serif;background:#fff;color:#2D1B3A;padding:40px 48px;font-size:12px}"
+    +"@page{size:A4;margin:10mm}"
+    +".header{border-bottom:3px solid #E8627A;padding-bottom:16px;margin-bottom:28px;display:flex;justify-content:space-between;align-items:flex-end}"
+    +".brand{font-family:'Playfair Display',serif;font-size:28px;color:#E8627A;font-weight:700}"
+    +".brand span{font-style:italic;color:#9B7EC8}"
+    +".report-meta{text-align:right;font-size:10px;color:#9B8AAA;line-height:1.8}"
+    +".total-box{background:linear-gradient(135deg,#FFF0F3,#F3EFF9);border:1.5px solid #F28EA0;border-radius:14px;padding:18px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center}"
+    +".total-lbl{font-size:10px;font-weight:700;color:#5A3D6B;letter-spacing:1px;text-transform:uppercase}"
+    +".total-num{font-family:'Playfair Display',serif;font-size:32px;color:#9B7EC8;font-weight:700}"
+    +".total-sub{font-size:10px;color:#9B8AAA;margin-top:3px}"
+    +".section-title{font-family:'Playfair Display',serif;font-size:14px;color:#2D1B3A;margin-bottom:12px;font-style:italic;display:flex;align-items:center;gap:8px}"
+    +"table{width:100%;border-collapse:collapse}"
+    +"th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#9B8AAA;padding:8px 12px;text-align:left;border-bottom:2px solid #F7F0E8;font-weight:700}"
+    +"td{padding:10px 12px;border-bottom:1px solid #F7F0E8;font-size:12px}"
+    +"tr:nth-child(even) td{background:#FDFBFF}"
+    +".td-amount{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#E8627A;text-align:right}"
+    +".total-row td{background:linear-gradient(135deg,#FFF0F3,#F3EFF9);font-weight:700}"
+    +".total-row .td-amount{color:#9B7EC8;font-size:16px}"
+    +".week-row td{background:#F3EFF9}"
+    +".footer{text-align:center;font-size:9px;color:#C4B8D0;margin-top:28px;padding-top:14px;border-top:1px solid #F7F0E8;letter-spacing:2px;text-transform:uppercase}";
+}
+
+function exportData(){
+  var blob=new Blob([JSON.stringify(DB,null,2)],{type:"application/json"});
+  var url=URL.createObjectURL(blob);
+  var a=document.createElement("a");
+  a.href=url;
+  a.download="agenda_cobros_"+new Date().toISOString().slice(0,10)+".json";
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+}
+
+function importData(){
+  var input=document.createElement("input");
+  input.type="file";input.accept=".json";
+  input.onchange=function(e){
+    var file=e.target.files[0];if(!file)return;
+    var reader=new FileReader();
+    reader.onload=function(ev){
+      try{
+        var parsed=JSON.parse(ev.target.result);
+        if(!parsed.payments)throw new Error("Archivo inválido");
+        var existing=DB.payments.map(function(p){return p.id;});
+        var added=0;
+        parsed.payments.forEach(function(p){
+          if(!existing.includes(p.id)){DB.payments.push(p);added++;}
+        });
+        saveDB();
+        alert("✅ Importados "+added+" cobros nuevos.");
+        renderTab();
+      }catch(err){alert("Error: "+err.message);}
+    };
+    reader.readAsText(file);
+  };
+  document.body.appendChild(input);input.click();
+  setTimeout(function(){document.body.removeChild(input);},2000);
+}
+
+function printReport(html){
+  var ov=document.getElementById("printOverlay");
+  var body=document.getElementById("printBody");
+  var cleanCSS=reportCSS().replace(/@import[^;]+;/,"");
+  body.innerHTML="<style>"+cleanCSS+"</style>"+html;
+  ov.style.display="block";
+  ov.scrollTop=0;
+  var fab=document.getElementById("btnFAB");
+  if(fab)fab.style.display="none";
+}
+function closePrintOverlay(){
+  document.getElementById("printOverlay").style.display="none";
+  document.getElementById("printBody").innerHTML="";
+  var fab=document.getElementById("btnFAB");
+  if(fab)fab.style.display="flex";
+}
+function doPrint(){
+  var ov=document.getElementById("printOverlay");
+  ov.style.display="block";
+  ov.style.visibility="visible";
+  document.getElementById("printBody").style.visibility="visible";
+  setTimeout(function(){window.print();},80);
+}
+
+function genDailyReport(dateStr){
+  var pays=DB.payments.filter(function(p){return p.date===dateStr;});
+  var total=pays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+  var d=new Date(dateStr+"T12:00:00");
+  var dateLabel=d.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  var printDate=new Date().toLocaleDateString("es-ES");
+
+  var h="<div class='header'>"
+    +"<div><div class='brand'>Carla Scherer <span>CS</span></div><div style='font-size:10px;color:#9B8AAA;margin-top:3px;letter-spacing:1px;text-transform:uppercase'>Informe Diario</div></div>"
+    +"<div class='report-meta'>Fecha del informe: "+printDate+"<br>"+dateLabel+"</div></div>";
+
+  h+="<div class='total-box'><div>"
+    +"<div class='total-lbl'>Total del D&iacute;a</div>"
+    +"<div class='total-num'>"+fmt(total)+"</div>"
+    +"<div class='total-sub'>"+pays.length+" cobro"+(pays.length!==1?"s":"")+" registrado"+(pays.length!==1?"s":"")+"</div></div>"
+    +"<span style='font-size:40px;opacity:.2'>✿</span></div>";
+
+  if(pays.length){
+    var adelaidePaysR=pays.filter(function(p){return p.comision===true||(p.client||"").toLowerCase().indexOf("adelaide")>=0;});
+    var adelaideTotalR=adelaidePaysR.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+    var subtotalR=pays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+    var regularSubtotalR=subtotalR-adelaideTotalR;
+    var totalNetoR=regularSubtotalR-adelaideTotalR;
+    var regularPays=pays.filter(function(p){return (p.client||"").toLowerCase().indexOf("adelaide")<0;});
+
+    h+="<div class='section-title'>✦ Detalle de cobros</div>"
+      +"<table><thead><tr><th>#</th><th>Cliente</th><th>Hora</th><th style='text-align:right'>Monto</th></tr></thead><tbody>";
+    var num=1;
+    for(var i=0;i<pays.length;i++){
+      var isAdR=(pays[i].client||"").toLowerCase().indexOf("adelaide")>=0;
+      if(!isAdR){
+        h+="<tr><td style='color:#9B8AAA'>"+num+"</td>"
+          +"<td style='font-weight:600'>"+esc(pays[i].client)+"</td>"
+          +"<td style='color:#9B8AAA'>"+pays[i].time+"</td>"
+          +"<td class='td-amount'>"+fmt(pays[i].amount)+"</td></tr>";
+        num++;
+      }
+    }
+    h+="<tr class='total-row'><td colspan='3' style='font-size:10px;letter-spacing:1px;text-transform:uppercase'>Subtotal</td>"
+      +"<td class='td-amount'>"+fmt(subtotalR-adelaideTotalR)+"</td></tr>";
+
+    if(adelaideTotalR>0){
+      for(var i=0;i<adelaidePaysR.length;i++){
+        h+="<tr style='background:#F3EFF9'><td colspan='2' style='color:#8066B0;font-weight:600'>Comisión: "+esc(adelaidePaysR[i].client)+"</td>"
+          +"<td style='color:#9B8AAA'>"+adelaidePaysR[i].time+"</td>"
+          +"<td style='text-align:right;color:#8066B0;font-weight:700;font-family:Lora,serif;font-size:14px'>-"+fmt(adelaidePaysR[i].amount)+"</td></tr>";
+      }
+      h+="<tr class='total-row'><td colspan='3' style='font-size:10px;letter-spacing:1px;text-transform:uppercase'>Total Neto</td>"
+        +"<td class='td-amount' style='font-size:18px'>"+fmt(totalNetoR)+"</td></tr>";
+    }
+    h+="</tbody></table>";
+  }
+  h+="<div class='footer'>Carla Scherer &bull; "+printDate+"</div>";
+  printReport(h);
+}
+
+function genWeekReport(mon,sun,total,pays){
+  var fmtD=function(d){return d.toLocaleDateString("es-ES",{day:"numeric",month:"long"});};
+  var weekLabel=fmtD(mon)+" — "+fmtD(sun)+", "+sun.getFullYear();
+  var printDate=new Date().toLocaleDateString("es-ES");
+
+  var h="<div class='header'>"
+    +"<div><div class='brand'>Carla Scherer <span>CS</span></div><div style='font-size:10px;color:#9B8AAA;margin-top:3px;letter-spacing:1px;text-transform:uppercase'>Informe Semanal</div></div>"
+    +"<div class='report-meta'>"+weekLabel+"<br>Generado: "+printDate+"</div></div>";
+
+  h+="<div class='total-box'><div>"
+    +"<div class='total-lbl'>Total de la Semana</div>"
+    +"<div class='total-num'>"+fmt(total)+"</div>"
+    +"<div class='total-sub'>"+pays.length+" cobro"+(pays.length!==1?"s":"")+" en la semana</div></div>"
+    +"<span style='font-size:40px;opacity:.2'>💜</span></div>";
+
+  // Daily breakdown
+  var days=["Lunes","Martes","Miércoles","Jueves","Viernes","Sábado","Domingo"];
+  h+="<div class='section-title'>✦ Resumen por d&iacute;a</div>"
+    +"<table><thead><tr><th>D&iacute;a</th><th>Fecha</th><th>Cobros</th><th style='text-align:right'>Total</th></tr></thead><tbody>";
+  for(var i=0;i<7;i++){
+    var dayDate=new Date(mon); dayDate.setDate(mon.getDate()+i);
+    var dayStr=dayDate.toISOString().slice(0,10);
+    var dayPays=pays.filter(function(p){return p.date===dayStr;});
+    var dayTotal=dayPays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+    h+="<tr"+(i===6?" class='week-row'":"")+">"
+      +"<td style='font-weight:600'>"+days[i]+"</td>"
+      +"<td style='color:#9B8AAA'>"+dayDate.toLocaleDateString("es-ES",{day:"numeric",month:"short"})+"</td>"
+      +"<td style='color:#9B8AAA'>"+dayPays.length+"</td>"
+      +"<td class='td-amount'>"+fmt(dayTotal)+"</td></tr>";
+  }
+  h+="<tr class='total-row'><td colspan='3' style='font-size:10px;letter-spacing:1px;text-transform:uppercase'>Total</td>"
+    +"<td class='td-amount'>"+fmt(total)+"</td></tr>"
+    +"</tbody></table>";
+
+  h+="<div class='footer'>Carla Scherer &bull; "+printDate+"</div>";
+  printReport(h);
+}
+
+function genMonthReport(monthLabel,total,pays,weeks){
+  var printDate=new Date().toLocaleDateString("es-ES");
+
+  var h="<div class='header'>"
+    +"<div><div class='brand'>Carla Scherer <span>CS</span></div><div style='font-size:10px;color:#9B8AAA;margin-top:3px;letter-spacing:1px;text-transform:uppercase'>Informe Mensual</div></div>"
+    +"<div class='report-meta'>"+monthLabel+"<br>Generado: "+printDate+"</div></div>";
+
+  var adelaideTotalM=pays.filter(function(p){return p.comision===true||(p.client||'').toLowerCase().indexOf('adelaide')>=0;}).reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+  var regularTotalM=total-adelaideTotalM;
+  var netoM=regularTotalM-adelaideTotalM;
+  var regularPaysM=pays.filter(function(p){return (p.client||'').toLowerCase().indexOf('adelaide')<0&&!p.comision;});
+
+  h+="<div class='total-box' style='display:block;padding:18px 24px'>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;margin-bottom:12px;border-bottom:1px solid rgba(232,98,122,.2)'>"
+    +"<div><div class='total-lbl'>Resumen del Mes</div><div style='font-size:10px;color:rgba(45,27,58,.5);margin-top:2px'>"+pays.length+" cobro"+(pays.length!==1?'s':'')+" en "+monthLabel+"</div></div>"
+    +"<span style='font-size:32px;opacity:.25'>🌸</span></div>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:10px'>"
+    +"<span style='font-size:11px;font-weight:700;color:rgba(45,27,58,.65);letter-spacing:.5px'>Cobros clientes</span>"
+    +"<span style='font-family:Playfair Display,serif;font-size:20px;font-weight:700;color:#2D1B3A'>"+fmt(regularTotalM)+"</span></div>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(155,126,200,.13);border-radius:8px;margin-bottom:12px'>"
+    +"<span style='font-size:11px;font-weight:700;color:#8066B0;letter-spacing:.5px'>Comisión Adelaide</span>"
+    +"<span style='font-family:Playfair Display,serif;font-size:20px;font-weight:700;color:#8066B0'>-"+fmt(adelaideTotalM)+"</span></div>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:2px solid rgba(232,98,122,.3)'>"
+    +"<span style='font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2D1B3A'>Total Neto</span>"
+    +"<span style='font-family:Playfair Display,serif;font-size:30px;font-weight:700;color:#9B7EC8'>"+fmt(netoM)+"</span></div>"
+    +"</div>";
+
+  h+="<div class='section-title'>✦ Resumen por semana</div>"
+    +"<table><thead><tr><th>Semana</th><th>Cobros</th><th style='text-align:right'>Total</th></tr></thead><tbody>";
+  for(var wk in weeks){
+    h+="<tr><td style='font-weight:600'>"+wk+"</td>"
+      +"<td style='color:#9B8AAA'>"+weeks[wk].count+"</td>"
+      +"<td class='td-amount'>"+fmt(weeks[wk].total)+"</td></tr>";
+  }
+  h+="<tr class='total-row'><td colspan='2' style='font-size:10px;letter-spacing:1px;text-transform:uppercase'>Total del Mes</td>"
+    +"<td class='td-amount'>"+fmt(total)+"</td></tr>"
+    +"</tbody></table>";
+
+  h+="<div class='footer'>Carla Scherer &bull; "+printDate+"</div>";
+  printReport(h);
+}
+
+document.getElementById("pwdInput").focus();
+
+function installApp(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(function(){deferredPrompt=null;});
+  } else {
+    alert("Para instalar:\n\n📱 Móvil: Menú del navegador → Agregar a pantalla de inicio\n\n💻 PC Chrome: Ícono ⊕ en la barra de dirección → Instalar");
+  }
+}
+
+// PWA Service Worker
+if("serviceWorker" in navigator){
+  var swCode = 'self.addEventListener("install",function(e){e.waitUntil(caches.open("cs-finanzas-v1").then(function(c){return c.addAll([])}))});'
+    + 'self.addEventListener("fetch",function(e){e.respondWith(caches.match(e.request).then(function(r){return r||fetch(e.request)}))});';
+  var blob = new Blob([swCode], {type:"application/javascript"});
+  var swUrl = URL.createObjectURL(blob);
+  navigator.serviceWorker.register(swUrl).catch(function(){});
+}
+
+// Show install prompt
+var deferredPrompt;
+window.addEventListener("beforeinstallprompt", function(e){
+  e.preventDefault();
+  deferredPrompt = e;
+  // Show install button if available
+  var installBtn = document.getElementById("installBtn");
+  if(installBtn) installBtn.style.display = "block";
+});
+// ── RANGE SELECTOR ───────────────────────────────────────────────────────
+function renderRangeSelector(){
+  var wrap=document.getElementById("mainWrap");
+  var now=new Date();
+  var curYear=now.getFullYear();
+  var monthNames=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+  // Build month options for the last 24 months + current
+  function monthOpts(selectedVal){
+    var o="";
+    for(var y=curYear-1;y<=curYear;y++){
+      for(var m=0;m<12;m++){
+        if(y===curYear&&m>now.getMonth())continue;
+        var val=y+"-"+(m<9?"0":"")+(m+1);
+        o+="<option value='"+val+"'"+(val===selectedVal?" selected":"")+">"+monthNames[m]+" "+y+"</option>";
+      }
+    }
+    return o;
+  }
+
+  // Default: from = 2 months ago, to = current month
+  var defTo=curYear+"-"+(now.getMonth()<9?"0":"")+(now.getMonth()+1);
+  var d2=new Date(now); d2.setMonth(d2.getMonth()-1);
+  var defFrom=d2.getFullYear()+"-"+(d2.getMonth()<9?"0":"")+(d2.getMonth()+1);
+
+  var div=document.createElement("div");
+  div.className="range-card";
+  div.innerHTML="<div class='range-title'><span>📆</span> Sumar período</div>"
+    +"<div class='range-grid'>"
+    +"<div><label class='range-label'>Desde</label><select class='range-select' id='rangeFrom'>"+monthOpts(defFrom)+"</select></div>"
+    +"<div><label class='range-label'>Hasta</label><select class='range-select' id='rangeTo'>"+monthOpts(defTo)+"</select></div>"
+    +"</div>"
+    +"<button class='btn-range' onclick='calcRange()'>Calcular total del período</button>"
+    +"<div class='range-result' id='rangeResult'>"
+    +"<div class='range-result-title' id='rangeResultTitle'></div>"
+    +"<div class='range-row'><span class='range-row-label'>Cobros clientes</span><span class='range-row-val' id='rRegular'></span></div>"
+    +"<div class='range-row comision'><span class='range-row-label'>Comisión Adelaide</span><span class='range-row-val' id='rComision'></span></div>"
+    +"<div class='range-divider'></div>"
+    +"<div class='range-row'><span class='range-neto-label'>Total Neto</span><span class='range-neto-val' id='rNeto'></span></div>"
+    +"<button class='range-btn-print' onclick='printRangeReport()'>Imprimir este resumen</button>"
+    +"</div>";
+  wrap.appendChild(div);
+}
+
+function calcRange(){
+  var from=document.getElementById("rangeFrom").value;
+  var to=document.getElementById("rangeTo").value;
+  if(from>to){alert("El mes de inicio debe ser anterior o igual al mes final.");return;}
+  var pays=DB.payments.filter(function(p){return p.date.slice(0,7)>=from&&p.date.slice(0,7)<=to;});
+  var adelaideT=pays.filter(function(p){return p.comision===true||(p.client||"").toLowerCase().indexOf("adelaide")>=0;})
+    .reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+  var total=pays.reduce(function(s,p){return s+parseFloat(p.amount||0);},0);
+  var regularT=total-adelaideT;
+  var netoT=regularT-adelaideT;
+
+  // Build period label
+  var monthNames=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  function fmtM(str){var p=str.split("-");return monthNames[parseInt(p[1])-1]+" "+p[0];}
+  var label=from===to?fmtM(from):fmtM(from)+" — "+fmtM(to);
+
+  document.getElementById("rangeResultTitle").textContent=label+" · "+pays.length+" cobro"+(pays.length!==1?"s":"");
+  document.getElementById("rRegular").textContent=fmt(regularT);
+  document.getElementById("rComision").textContent="-"+fmt(adelaideT);
+  document.getElementById("rNeto").textContent=fmt(netoT);
+  document.getElementById("rangeResult").style.display="block";
+
+  // Store for print
+  window._rangeData={label:label,pays:pays,regularT:regularT,adelaideT:adelaideT,netoT:netoT};
+}
+
+function printRangeReport(){
+  if(!window._rangeData)return;
+  var d=window._rangeData;
+  var printDate=new Date().toLocaleDateString("es-ES");
+  var monthNames=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+
+  var h="<div class='header'>"
+    +"<div><div class='brand'>Carla Scherer <span>CS</span></div>"
+    +"<div style='font-size:10px;color:#9B8AAA;margin-top:3px;letter-spacing:1px;text-transform:uppercase'>Resumen de Período</div></div>"
+    +"<div class='report-meta'>"+esc(d.label)+"<br>Generado: "+printDate+"</div></div>";
+
+  h+="<div class='total-box' style='display:block;padding:18px 24px'>"
+    +"<div style='font-size:10px;font-weight:700;color:#5A3D6B;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px'>"+esc(d.label)+" &nbsp;&bull;&nbsp; "+d.pays.length+" cobro"+(d.pays.length!==1?"s":"")+"</div>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:10px'>"
+    +"<span style='font-size:11px;font-weight:700;color:rgba(45,27,58,.65)'>Cobros clientes</span>"
+    +"<span style='font-family:Playfair Display,serif;font-size:22px;font-weight:700;color:#2D1B3A'>"+fmt(d.regularT)+"</span></div>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:rgba(155,126,200,.13);border-radius:8px;margin-bottom:12px'>"
+    +"<span style='font-size:11px;font-weight:700;color:#8066B0'>Comisión Adelaide</span>"
+    +"<span style='font-family:Playfair Display,serif;font-size:22px;font-weight:700;color:#8066B0'>-"+fmt(d.adelaideT)+"</span></div>"
+    +"<div style='display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:2px solid rgba(232,98,122,.3)'>"
+    +"<span style='font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2D1B3A'>Total Neto</span>"
+    +"<span style='font-family:Playfair Display,serif;font-size:32px;font-weight:700;color:#9B7EC8'>"+fmt(d.netoT)+"</span></div></div>";
+
+  // Monthly breakdown table
+  var months={};
+  d.pays.forEach(function(p){
+    var mk=p.date.slice(0,7);
+    if(!months[mk])months[mk]={total:0,adelaide:0,count:0};
+    months[mk].total+=parseFloat(p.amount||0);
+    months[mk].count++;
+    if(p.comision===true||(p.client||"").toLowerCase().indexOf("adelaide")>=0)
+      months[mk].adelaide+=parseFloat(p.amount||0);
+  });
+  var mkeys=Object.keys(months).sort();
+  if(mkeys.length>1){
+    h+="<div class='section-title'>✦ Detalle por mes</div>"
+      +"<table><thead><tr><th>Mes</th><th>Cobros</th><th style='text-align:right'>Clientes</th><th style='text-align:right'>Adelaide</th><th style='text-align:right'>Neto</th></tr></thead><tbody>";
+    for(var i=0;i<mkeys.length;i++){
+      var mk=mkeys[i]; var md=months[mk];
+      var reg=md.total-md.adelaide; var net=reg-md.adelaide;
+      var mp=mk.split("-");
+      var mlabel=monthNames[parseInt(mp[1])-1]+" "+mp[0];
+      h+="<tr><td style='font-weight:600'>"+mlabel+"</td><td style='color:#9B8AAA'>"+md.count+"</td>"
+        +"<td class='td-amount'>"+fmt(reg)+"</td>"
+        +"<td style='text-align:right;color:#8066B0;font-weight:700'>-"+fmt(md.adelaide)+"</td>"
+        +"<td class='td-amount' style='color:#9B7EC8'>"+fmt(net)+"</td></tr>";
+    }
+    h+="<tr class='total-row'><td colspan='2' style='font-size:10px;letter-spacing:1px;text-transform:uppercase'>Total período</td>"
+      +"<td class='td-amount'>"+fmt(d.regularT)+"</td>"
+      +"<td style='text-align:right;color:#8066B0;font-weight:700'>-"+fmt(d.adelaideT)+"</td>"
+      +"<td class='td-amount' style='color:#9B7EC8;font-size:17px'>"+fmt(d.netoT)+"</td></tr>"
+      +"</tbody></table>";
+  }
+
+  h+="<div class='footer'>Carla Scherer &bull; "+printDate+"</div>";
+  printReport(h);
+}
+
+
+</script>
+
+<button class="fab" id="btnFAB">+</button>
+<div class="quick-overlay" id="quickOverlay" onclick="closeQuick()"></div>
+<div class="quick-panel" id="quickPanel">
+  <div class="quick-handle" onclick="closeQuick()"></div>
+  <div class="quick-panel-header">
+    <div class="quick-panel-title"><span>&#10023;</span> Cobro R&#225;pido</div>
+    <button class="quick-close" onclick="closeQuick()">&times;</button>
+  </div>
+  <div class="quick-toast" id="quickToast">
+    <div class="qt-title">&#10003; Cobro registrado</div>
+    <div class="qt-body" id="quickToastBody"></div>
+  </div>
+  <div class="quick-field">
+    <label class="quick-field-label">Nombre del Cliente</label>
+    <input class="quick-input" type="text" id="qClient" placeholder="Nombre de la clienta..."/>
+  </div>
+  <div class="quick-field">
+    <label class="quick-field-label">Monto del Pago</label>
+    <input class="quick-input" type="number" id="qAmount" placeholder="0.00" step="0.01" min="0"/>
+  </div>
+  <div class="quick-field">
+    <label class="quick-field-label">Fecha</label>
+    <input class="quick-input" type="date" id="qDate"/>
+  </div>
+  <label class="quick-comision">
+    <input type="checkbox" id="qComision" style="width:18px;height:18px;accent-color:var(--lavender);cursor:pointer"/>
+    <span style="font-size:13px;font-weight:600;color:var(--lavender2)">Es comisi&#243;n / gasto (se resta del total)</span>
+  </label>
+  <button class="quick-btn" onclick="saveQuick()"><span>&#10022;</span> Agregar Cobro</button>
+</div>
+<div id="printOverlay">
+  <div class="print-toolbar">
+    <div class="print-tb-brand">Carla Scherer <span>CS</span></div>
+    <div class="print-tb-btns">
+      <button class="print-btn-back" onclick="closePrintOverlay()">&#8592; Volver</button>
+      <button class="print-btn-pdf" onclick="doPrint()">Imprimir / PDF</button>
+    </div>
+  </div>
+  <div class="print-frame" id="printBody"></div>
+</div>
+</body>
+</html>
