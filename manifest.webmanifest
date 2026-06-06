@@ -1,0 +1,26 @@
+{
+  "background_color": "#ffffff",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Carla Scherer Finanzas",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Carla Scherer",
+  "start_url": "/",
+  "theme_color": "#E8627A",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,&lt;svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'&gt;&lt;rect width='100' height='100' rx='20' fill='%23E8627A'/&gt;&lt;text y='.9em' font-size='60' x='50' text-anchor='middle' fill='white' font-family='serif' font-weight='bold'&gt;CS&lt;/text&gt;&lt;/svg&gt;",
+      "isSquare": false,
+      "isPng": false,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 0,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "description": "Controla y registra tus cobros diarios",
+  "id": "https://angel14.github.io/carla-finanzas"
+}
