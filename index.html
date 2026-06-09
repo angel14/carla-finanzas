@@ -431,6 +431,44 @@ body::before{
 </style>
 </head>
 <body>
+  <div id="loading"> <img src="/carla-finanzas/icon-512.png" id="logo"> <div id="coracao">❤</div> </div>
+Agora também copie este CSS e coloque no final do seu bloco <style>, antes de </style>:
+
+#loading {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+position: fixed;
+inset: 0;
+background: rgba(255,255,255,0.6);
+backdrop-filter: blur(4px);
+z-index: 999999;
+}
+
+#logo {
+width: 120px;
+animation: brilho 2s infinite;
+}
+
+#coracao {
+font-size: 38px;
+color: #d33;
+margin-top: 12px;
+animation: bater 0.8s infinite ease-in-out;
+}
+
+@keyframes brilho {
+0% { filter: brightness(1); }
+50% { filter: brightness(1.6); }
+100% { filter: brightness(1); }
+}
+
+@keyframes bater {
+0% { transform: scale(1); }
+50% { transform: scale(1.25); }
+100% { transform: scale(1); }
+}
 
 <!-- LOGIN -->
 <div id="loginScreen">
