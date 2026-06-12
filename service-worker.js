@@ -1,1 +1,10 @@
-{ "name": "Carla Scherer - Finanzas", "short_name": "CS Finanzas", "start_url": "/carla-finanzas/", "scope": "/carla-finanzas/", "display": "standalone", "background_color": "#DADADA", "theme_color": "#DADADA", "orientation": "portrait", "icons": [ { "src": "/carla-finanzas/icon-192.png", "sizes": "192x192", "type": "image/png" }, { "src": "/carla-finanzas/icon-512.png", "sizes": "512x512", "type": "image/png" } ] }
+self.addEventListener('install', event => {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', event => {
+  console.log('Service Worker ativado');
+});
+
+self.addEventListener('fetch', event => {
+});
