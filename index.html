@@ -1,159 +1,175 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="CS Finanzas">
-<meta name="application-name" content="CS Finanzas">
-<meta name="theme-color" content="#E8627A">
-<link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="manifest" href="manifest.json">
-<title>Carla Scherer Agent2 — Finanzas</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="CS Finanzas">
+  <meta name="application-name" content="CS Finanzas">
+  <meta name="theme-color" content="#E8627A">
+
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="manifest" href="manifest.json">
+
+  <title>Carla Scherer Agent2 — Finanzas</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="loginScreen">
-  <div class="login-deco">
-    <div class="login-petal petal-1"></div>
-    <div class="login-petal petal-2"></div>
-    <div class="login-petal petal-3"></div>
-    <div class="login-petal petal-4"></div>
-  </div>
-  <div class="login-card">
-    <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--lavender);text-align:center;margin-bottom:4px;letter-spacing:3px">CS</div>
-    <div class="login-brand">Carla Scherer</div>
-    <div class="login-sub">Finanzas</div>
-    <label class="login-label">Contraseña de Acceso</label>
-    <input class="login-input" type="password" id="pwdInput" placeholder="• • • • • •" autocomplete="off"/>
-    <button class="login-btn" id="loginBtn">Ingresar</button>
-    <div class="login-err" id="loginErr">Contraseña incorrecta</div>
-    <div class="login-cfg" id="ctog">Configuración</div>
-    <div class="cfg-panel" id="cpanel">
-      <input class="cfg-input" type="password" id="cfgAdmin" placeholder="Contraseña administrador"/>
-      <input class="cfg-input" type="password" id="cfgPwd" placeholder="Nueva contraseña de acceso"/>
-      <button class="cfg-btn" id="cfgBtn">Guardar cambios</button>
-      <div id="cfgStatus" style="font-size:10px;text-align:center;margin-top:8px;color:var(--mint)"></div>
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <div class="login-deco">
+      <div class="login-petal petal-1"></div>
+      <div class="login-petal petal-2"></div>
+      <div class="login-petal petal-3"></div>
+      <div class="login-petal petal-4"></div>
     </div>
-  </div>
-</div>
-
-<!-- APP -->
-<div id="app">
-  <div class="header">
-    <div class="header-stripe"></div>
-    <div class="header-inner">
-      <div class="header-cs">CS</div>
-      <div class="header-brand">Carla Scherer</div>
-      <div class="header-date" id="headerDate"></div>
-      <button class="header-cfg-btn" id="btnSettings">Ajustes</button>
+    <div class="login-card">
+      <div style="font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--lavender);text-align:center;margin-bottom:4px;letter-spacing:3px">CS</div>
+      <div class="login-brand">Carla Scherer</div>
+      <div class="login-sub">Finanzas</div>
+      <label class="login-label">Contraseña de Acceso</label>
+      <input class="login-input" type="password" id="pwdInput" placeholder="• • • • • •" autocomplete="off"/>
+      <button class="login-btn" id="loginBtn">Ingresar</button>
+      <div class="login-err" id="loginErr">Contraseña incorrecta</div>
+      <div class="login-cfg" id="ctog">Configuración</div>
+      <div class="cfg-panel" id="cpanel">
+        <input class="cfg-input" type="password" id="cfgAdmin" placeholder="Contraseña administrador"/>
+        <input class="cfg-input" type="password" id="cfgPwd" placeholder="Nueva contraseña de acceso"/>
+        <button class="cfg-btn" id="cfgBtn">Guardar cambios</button>
+        <div id="cfgStatus" style="font-size:10px;text-align:center;margin-top:8px;color:var(--mint)"></div>
+      </div>
     </div>
   </div>
 
-  <div class="settings-panel" id="settingsPanel">
-    <div class="settings-inner">
-      <div class="settings-title">
-        Ajustes <button class="settings-close" id="btnCloseSettings">&times;</button>
+  <!-- APP -->
+  <div id="app">
+    <div class="header">
+      <div class="header-stripe"></div>
+      <div class="header-inner">
+        <div class="header-cs">CS</div>
+        <div class="header-brand">Carla Scherer</div>
+        <div class="header-date" id="headerDate"></div>
+        <button class="header-cfg-btn" id="btnSettings">Ajustes</button>
       </div>
-      <div class="s-row">
-        <div class="s-field"><label>Contraseña Admin</label><input type="password" id="s_admin" placeholder="admin2024"/></div>
-        <div class="s-field"><label>Nueva Contraseña</label><input type="password" id="s_pwd" placeholder="Nueva contraseña"/></div>
-      </div>
-      <div class="s-btn-row">
-        <button class="s-btn s-btn-rose" id="s_savePwd">Guardar contraseña</button>
-      </div>
-      <div class="s-divider"><span>Instalar como App</span></div>
-      <div class="s-cloud-info">Instalá la agenda en tu dispositivo para usarla como una app normal, sin abrir el navegador.</div>
-      <div class="s-btn-row">
-        <button class="s-btn s-btn-rose" id="installBtn" style="display:none" onclick="installApp()">🚀 Instalar en este dispositivo</button>
-      </div>
-      <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8">
-        <strong>📱 Móvil:</strong> Menú del navegador → <em>"Agregar a pantalla de inicio"</em><br>
-        <strong>💻 PC:</strong> En Chrome, el ícono ⊕ en la barra de dirección → <em>"Instalar"</em>
-      </div>
-      <div class="s-divider"><span>Sincronización</span></div>
-      <div class="s-cloud-info">Sin cuenta. Pulsá <strong>Crear nube</strong> y copiá el ID en el otro dispositivo.</div>
-      <div class="s-field" style="margin-bottom:12px"><label>ID de Sync</label><input type="text" id="s_binId" placeholder="Pegá el ID aquí" style="font-family:monospace"/></div>
-      <div class="s-btn-row">
-        <button class="s-btn s-btn-rose" id="s_createCloud">Crear nube</button>
-        <button class="s-btn s-btn-lav" id="s_saveCloud">Conectar con ID</button>
-        <span id="s_cloudStatus" style="font-size:10px;color:var(--mint);letter-spacing:1px"></span>
-      </div>
-      <div class="cloud-id-box" id="s_binIdDisplay">
-        <div class="cloud-id-label">Tu ID de Sync</div>
-        <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
-          <div class="cloud-id-val" id="s_binIdVal"></div>
-          <button class="s-btn s-btn-lav" id="s_copyBinId" style="padding:5px 14px">Copiar</button>
+    </div>
+
+    <div class="settings-panel" id="settingsPanel">
+      <div class="settings-inner">
+        <div class="settings-title">
+          Ajustes <button class="settings-close" id="btnCloseSettings">&times;</button>
+        </div>
+
+        <div class="s-row">
+          <div class="s-field"><label>Contraseña Admin</label><input type="password" id="s_admin" placeholder="admin2024"/></div>
+          <div class="s-field"><label>Nueva Contraseña</label><input type="password" id="s_pwd" placeholder="Nueva contraseña"/></div>
+        </div>
+
+        <div class="s-btn-row">
+          <button class="s-btn s-btn-rose" id="s_savePwd">Guardar contraseña</button>
+        </div>
+
+        <div class="s-divider"><span>Instalar como App</span></div>
+        <div class="s-cloud-info">Instalá la agenda en tu dispositivo para usarla como una app normal, sin abrir el navegador.</div>
+
+        <div class="s-btn-row">
+          <button class="s-btn s-btn-rose" id="installBtn" style="display:none" onclick="installApp()">🚀 Instalar en este dispositivo</button>
+        </div>
+
+        <div style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.8">
+          <strong>📱 Móvil:</strong> Menú del navegador → <em>"Agregar a pantalla de inicio"</em><br>
+          <strong>💻 PC:</strong> En Chrome, ícono ⊕ en la barra de dirección → <em>"Instalar"</em>
+        </div>
+
+        <div class="s-divider"><span>Sincronización</span></div>
+        <div class="s-cloud-info">Sin cuenta. Pulsá <strong>Crear nube</strong> y copiá el ID en el otro dispositivo.</div>
+        <div class="s-field" style="margin-bottom:12px"><label>ID de Sync</label><input type="text" id="s_binId" placeholder="Pegá el ID aquí" style="font-family:monospace"/></div>
+
+        <div class="s-btn-row">
+          <button class="s-btn s-btn-rose" id="s_createCloud">Crear nube</button>
+          <button class="s-btn s-btn-lav" id="s_saveCloud">Conectar con ID</button>
+          <span id="s_cloudStatus" style="font-size:10px;color:var(--mint);letter-spacing:1px"></span>
+        </div>
+
+        <div class="cloud-id-box" id="s_binIdDisplay">
+          <div class="cloud-id-label">Tu ID de Sync</div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:6px">
+            <div class="cloud-id-val" id="s_binIdVal"></div>
+            <button class="s-btn s-btn-lav" id="s_copyBinId" style="padding:5px 14px">Copiar</button>
+          </div>
+        </div>
+
+        <div class="s-divider"><span>✨ Sincronización Manual</span></div>
+        <div class="s-cloud-info" style="background:var(--lavender-pale);border:1px solid var(--lavender);border-radius:10px;padding:10px 12px">
+          💡 <strong>Recomendado:</strong> Generá el código, copialo y mandalo por WhatsApp al otro dispositivo.
+        </div>
+
+        <textarea id="s_syncCode" placeholder="El código aparecerá aquí..." style="width:100%;height:60px;background:var(--cream);border:1.5px solid var(--cream3);border-radius:10px;padding:10px;font-family:monospace;font-size:11px;resize:none;outline:none;margin-bottom:10px;color:var(--text)"></textarea>
+
+        <div class="s-btn-row">
+          <button class="s-btn s-btn-rose" id="s_genCode">Generar código</button>
+          <button class="s-btn s-btn-lav" id="s_importCode">Importar código</button>
         </div>
       </div>
-      <div class="s-divider"><span>✨ Sincronización Manual (siempre funciona)</span></div>
-      <div class="s-cloud-info" style="background:var(--lavender-pale);border:1px solid var(--lavender);border-radius:10px;padding:10px 12px">💡 <strong>Recomendado:</strong> Generá el código, copiálo y mandálo por WhatsApp al otro dispositivo. Generálo aquí, copiálo y pegálo en el otro dispositivo.</div>
-      <textarea id="s_syncCode" placeholder="El código aparecerá aquí..." style="width:100%;height:60px;background:var(--cream);border:1.5px solid var(--cream3);border-radius:10px;padding:10px;font-family:monospace;font-size:11px;resize:none;outline:none;margin-bottom:10px;color:var(--text)"></textarea>
-      <div class="s-btn-row">
-        <button class="s-btn s-btn-rose" id="s_genCode">Generar código</button>
-        <button class="s-btn s-btn-lav" id="s_importCode">Importar código</button>
+    </div>
+
+    <div class="wrap">
+      <div class="tabs">
+        <button class="tab active" id="tabHoy" onclick="switchTab('hoy')">Hoy</button>
+        <button class="tab" id="tabSemana" onclick="switchTab('semana')">Semana</button>
+        <button class="tab" id="tabMes" onclick="switchTab('mes')">Mes</button>
+      </div>
+      <div id="mainWrap"></div>
+    </div>
+  </div>
+
+  <button class="fab" id="btnFAB">+</button>
+
+  <div class="quick-overlay" id="quickOverlay" onclick="closeQuick()"></div>
+  <div class="quick-panel" id="quickPanel">
+    <div class="quick-handle" onclick="closeQuick()"></div>
+    <div class="quick-panel-header">
+      <div class="quick-panel-title"><span>✧</span> Cobro Rápido</div>
+      <button class="quick-close" onclick="closeQuick()">&times;</button>
+    </div>
+    <div class="quick-toast" id="quickToast">
+      <div class="qt-title">✓ Cobro registrado</div>
+      <div class="qt-body" id="quickToastBody"></div>
+    </div>
+    <div class="quick-field">
+      <label class="quick-field-label">Nombre del Cliente</label>
+      <input class="quick-input" type="text" id="qClient" placeholder="Nombre de la clienta..."/>
+    </div>
+    <div class="quick-field">
+      <label class="quick-field-label">Monto del Pago</label>
+      <input class="quick-input" type="number" id="qAmount" placeholder="0.00" step="0.01" min="0"/>
+    </div>
+    <div class="quick-field">
+      <label class="quick-field-label">Fecha</label>
+      <input class="quick-input" type="date" id="qDate"/>
+    </div>
+    <label class="quick-comision">
+      <input type="checkbox" id="qComision" style="width:18px;height:18px;accent-color:var(--lavender);cursor:pointer"/>
+      <span style="font-size:13px;font-weight:600;color:var(--lavender2)">Es comisión / gasto (se resta del total)</span>
+    </label>
+    <button class="quick-btn" onclick="saveQuick()"><span>✦</span> Agregar Cobro</button>
+  </div>
+
+  <div id="printOverlay">
+    <div class="print-toolbar">
+      <div class="print-tb-brand">Carla Scherer <span>CS</span></div>
+      <div class="print-tb-btns">
+        <button class="print-btn-back" onclick="closePrintOverlay()">← Volver</button>
+        <button class="print-btn-pdf" onclick="doPrint()">Imprimir / PDF</button>
       </div>
     </div>
+    <div class="print-frame" id="printBody"></div>
   </div>
 
-  <div class="wrap">
-    <div class="tabs">
-      <button class="tab active" id="tabHoy" onclick="switchTab('hoy')">Hoy</button>
-      <button class="tab" id="tabSemana" onclick="switchTab('semana')">Semana</button>
-      <button class="tab" id="tabMes" onclick="switchTab('mes')">Mes</button>
-    </div>
-    <div id="mainWrap"></div>
-  </div>
-</div>
-
-<button class="fab" id="btnFAB">+</button>
-
-<div class="quick-overlay" id="quickOverlay" onclick="closeQuick()"></div>
-<div class="quick-panel" id="quickPanel">
-  <div class="quick-handle" onclick="closeQuick()"></div>
-  <div class="quick-panel-header">
-    <div class="quick-panel-title"><span>✧</span> Cobro Rápido</div>
-    <button class="quick-close" onclick="closeQuick()">&times;</button>
-  </div>
-  <div class="quick-toast" id="quickToast">
-    <div class="qt-title">✓ Cobro registrado</div>
-    <div class="qt-body" id="quickToastBody"></div>
-  </div>
-  <div class="quick-field">
-    <label class="quick-field-label">Nombre del Cliente</label>
-    <input class="quick-input" type="text" id="qClient" placeholder="Nombre de la clienta..."/>
-  </div>
-  <div class="quick-field">
-    <label class="quick-field-label">Monto del Pago</label>
-    <input class="quick-input" type="number" id="qAmount" placeholder="0.00" step="0.01" min="0"/>
-  </div>
-  <div class="quick-field">
-    <label class="quick-field-label">Fecha</label>
-    <input class="quick-input" type="date" id="qDate"/>
-  </div>
-  <label class="quick-comision">
-    <input type="checkbox" id="qComision" style="width:18px;height:18px;accent-color:var(--lavender);cursor:pointer"/>
-    <span style="font-size:13px;font-weight:600;color:var(--lavender2)">Es comisión / gasto (se resta del total)</span>
-  </label>
-  <button class="quick-btn" onclick="saveQuick()"><span>✦</span> Agregar Cobro</button>
-</div>
-
-<div id="printOverlay">
-  <div class="print-toolbar">
-    <div class="print-tb-brand">Carla Scherer <span>CS</span></div>
-    <div class="print-tb-btns">
-      <button class="print-btn-back" onclick="closePrintOverlay()">← Volver</button>
-      <button class="print-btn-pdf" onclick="doPrint()">Imprimir / PDF</button>
-    </div>
-  </div>
-  <div class="print-frame" id="printBody"></div>
-</div>
-
-<script src="js/app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
