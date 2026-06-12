@@ -1,10 +1,20 @@
-self.addEventListener('install', event => {
-  self.skipWaiting();
+const CACHE_NAME = "cs-finanzas-v1";
+const ASSETS = [
+  "./",
+  "./index.html",
+  "./css/style.css",
+  "./js/app.js",
+  "./manifest.json"
+];
+
+self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+  );
 });
 
-self.addEventListener('activate', event => {
-  console.log('Service Worker ativado');
-});
-
-self.addEventListener('fetch', event => {
+self.addEventListener("fetch", event => {
+  event.respondWith(
+    caches.match(event.request).then(response => response || fetch(event.request))
+  );
 });
